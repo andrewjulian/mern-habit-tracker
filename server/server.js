@@ -37,72 +37,78 @@ app.get("/api/home", (req, res) => {
   });
 });
 
-const userSchema = new Schema({
-  username: { type: String, required: true },
-  password: { type: String, required: true },
-  display_name: { type: String, required: true },
-  email: { type: String, required: true },
+const userSchema = new Schema(
+  {
+    username: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    display_name: { type: String, required: true },
+    email: { type: String, required: true },
+  },
+  { timestamps: true }
+);
+
+userSchema.virtual("cards", {
+  ref: "Card",
+  localField: "_id",
+  foreignField: "user",
 });
+
+userSchema.set("toJSON", { virtuals: true });
+userSchema.set("toObject", { virtuals: true });
 
 const User = mongoose.model("User", userSchema);
 
-app.post("/api/user", (req, res) => {
-  const user = new User({
-    username: req.body.username,
-    password: req.body.password,
-    display_name: req.body.display_name,
-    email: req.body.email,
-  });
-  user
-    .save()
-    .then((result) => {
-      console.log(result);
-      res.status(201).json({
-        message: "Handling POST requests to /api/user",
-        createdUser: user,
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json({
-        error: err,
-      });
+app.get("/api/user", async (req, res) => {
+  try {
+    const users = await User.find().populate({
+      path: "cards",
+      select: "date type",
     });
+    res.json(users);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 });
 
-const cardSchema = new Schema({
-  user_id: { type: String, required: true },
-  date: { type: Date, required: true },
-  type: { type: String, required: true },
-  highlight: { type: String, required: true },
-  should_do: { type: array }, //array of strings
-  could_do: { type: array }, //array of strings
+app.post("/api/user", async (req, res) => {
+  const user = new User(req.body);
+  try {
+    const newUser = await user.save();
+    res.status(201).json(newUser);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
+const cardSchema = new Schema(
+  {
+    user: { type: Schema.Types.ObjectId, ref: "User", required: true },
+    date: { type: Date, required: true },
+    type: { type: String, required: true },
+    highlight: { type: String, required: true },
+    should_do: { type: array }, //array of strings
+    could_do: { type: array }, //array of strings
+  },
+  { timestamps: true }
+);
+
+app.post("/api/card", async (req, res) => {
+  const card = new Card(req.body);
+  try {
+    const newCard = await card.save();
+    res.status(201).json(newCard);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
 });
 
 const Card = mongoose.model("Card", cardSchema);
 
-app.post("/api/card", (req, res) => {
-  const card = new Card({
-    user_id: req.body.user_id,
-    date: req.body.date,
-    type: req.body.type,
-    highlight: req.body.highlight,
-    should_do: req.body.should_do,
-    could_do: req.body.could_do,
-  });
-  card
-    .save()
-    .then((result) => {
-      console.log(result);
-      res.status(201).json({
-        message: "Handling POST requests to /api/card",
-        createdCard: card,
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json({
-        error: err,
-      });
-    });
+app.get("/api/card", async (req, res) => {
+  try {
+    const cards = await Card.find();
+    res.json(cards);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 });
