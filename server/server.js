@@ -29,6 +29,14 @@ mongoose
     console.error("Error connecting to MongoDB Atlas:", error);
   });
 
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("Something went wrong!");
+});
+
 app.get("/home", (req, res) => {
-  res.json({ message: "Hello World" });
+  res.json({
+    name: "John Doe",
+    age: 30,
+  });
 });
