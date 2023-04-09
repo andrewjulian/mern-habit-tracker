@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
+import Landing from "./Components/Landing";
 
 function App() {
   const [data, setData] = useState({});
@@ -20,9 +21,8 @@ function App() {
   }, []);
 
   return (
-    <div className="bg-red-500 flex flex-row justify-center">
-      {data.name}
-      {data.age}
+    <div>
+      <Landing />
     </div>
   );
 }
