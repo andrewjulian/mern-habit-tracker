@@ -1,9 +1,9 @@
 import React from "react";
 
-const Landing = ({ data }) => {
+const Landing = () => {
   return (
     <div>
-      <h1>{data}</h1>
+      <h1>Landing</h1>
     </div>
   );
 };

@@ -1,6 +1,4 @@
 import { useState, useEffect } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
 import Landing from "./Components/Landing";
 import SignUp from "./Components/SignUp";
@@ -11,7 +9,7 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("/api/users");
+        const response = await fetch("/api/home");
         const data = await response.json();
         setData(data);
       } catch (error) {
@@ -23,6 +21,7 @@ function App() {
 
   return (
     <div>
+      {data.name}
       <SignUp />
       <Landing data={data} />
     </div>

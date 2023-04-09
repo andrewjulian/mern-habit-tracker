@@ -86,8 +86,8 @@ const cardSchema = new Schema(
     date: { type: Date, required: true },
     type: { type: String, required: true },
     highlight: { type: String, required: true },
-    should_do: { type: array }, //array of strings
-    could_do: { type: array }, //array of strings
+    should_do: { type: Array }, //array of strings
+    could_do: { type: Array }, //array of strings
   },
   { timestamps: true }
 );
