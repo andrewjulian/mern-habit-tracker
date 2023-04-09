@@ -20,7 +20,7 @@ function App() {
   }, []);
 
   return (
-    <div>
+    <div className="bg-red-500 flex flex-row justify-center">
       {data.name}
       {data.age}
     </div>
