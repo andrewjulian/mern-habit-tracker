@@ -1,7 +1,11 @@
 import React from "react";
 
-const Landing = () => {
-  return <div>Landing</div>;
+const Landing = ({ data }) => {
+  return (
+    <div>
+      <h1>{data}</h1>
+    </div>
+  );
 };
 
 export default Landing;
