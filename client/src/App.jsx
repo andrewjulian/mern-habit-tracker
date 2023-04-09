@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "./App.css";
 import Landing from "./Components/Landing";
 import SignUp from "./Components/SignUp";
+import Navbar from "./Components/Navbar";
 
 function App() {
   const [data, setData] = useState({});
@@ -24,6 +25,7 @@ function App() {
       {data.name}
       <SignUp />
       <Landing data={data} />
+      <Navbar />
     </div>
   );
 }
