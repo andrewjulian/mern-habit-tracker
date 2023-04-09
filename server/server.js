@@ -3,6 +3,10 @@ const app = express();
 const cors = require("cors");
 const mongoose = require("mongoose");
 require("dotenv").config();
+const bodyParser = require("body-parser");
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 const listener = app.listen(process.env.PORT || 3000, () => {
   console.log("Your app is listening on port " + listener.address().port);
@@ -24,3 +28,7 @@ mongoose
   .catch((error) => {
     console.error("Error connecting to MongoDB Atlas:", error);
   });
+
+app.get("/home", (req, res) => {
+  res.json({ message: "Hello World" });
+});
