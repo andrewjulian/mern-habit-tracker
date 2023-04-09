@@ -29,7 +29,7 @@ mongoose
     console.error("Error connecting to MongoDB Atlas:", error);
   });
 
-app.get("/home", (req, res) => {
+app.get("/api/home", (req, res) => {
   res.json({
     name: "John Doe",
     age: 30,
