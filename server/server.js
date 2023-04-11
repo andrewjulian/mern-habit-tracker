@@ -30,32 +30,23 @@ mongoose
     console.error("Error connecting to MongoDB Atlas:", error);
   });
 
-app.get("/api/home", (req, res) => {
+/* app.get("/api/home", (req, res) => {
   res.json({
     name: "John Doe",
     age: 30,
   });
-});
+}); */
 
-const userSchema = new Schema(
+/* const userSchema = new Schema(
   {
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     email: { type: String, required: true },
   },
   { timestamps: true }
-);
+); */
 
-userSchema.virtual("cards", {
-  ref: "Card",
-  localField: "_id",
-  foreignField: "user",
-});
-
-userSchema.set("toJSON", { virtuals: true });
-userSchema.set("toObject", { virtuals: true });
-
-const User = mongoose.model("User", userSchema);
+app.use("/api/auth", require("./Auth/route"));
 
 app.get("/api/user", async (req, res) => {
   try {
@@ -69,7 +60,7 @@ app.get("/api/user", async (req, res) => {
   }
 });
 
-app.post("/api/user", async (req, res) => {
+/* app.post("/api/user", async (req, res) => {
   const user = new User(req.body);
   try {
     const newUser = await user.save();
@@ -77,7 +68,7 @@ app.post("/api/user", async (req, res) => {
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
-});
+}); */
 
 const cardSchema = new Schema(
   {

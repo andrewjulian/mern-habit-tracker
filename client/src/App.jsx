@@ -5,28 +5,39 @@ import SignUp from "./Components/SignUp";
 import Navbar from "./Components/Navbar";
 
 function App() {
-  const [data, setData] = useState({});
+  //const [data, setData] = useState({});
   const [user, setUser] = useState({});
 
+  /* const fetchData = async () => {
+    try {
+      const response = await fetch("/api/home");
+      const data = await response.json();
+      setData(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }; */
+
+  const fetchUser = async () => {
+    try {
+      const response = await fetch("/api/user");
+      const data = await response.json();
+      setUser(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("/api/home");
-        const data = await response.json();
-        setData(data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchData();
+    fetchUser();
+    //fetchData();
   }, []);
 
   return (
     <div>
       <h1> Welcome {user.username} </h1>
-      {data.name}
       <SignUp setUser={setUser} />
-      <Landing data={data} />
+      <Landing />
       <Navbar />
     </div>
   );
