@@ -48,28 +48,6 @@ mongoose
 
 app.use("/api/auth", require("./Auth/route"));
 
-app.get("/api/user", async (req, res) => {
-  try {
-    const users = await User.find().populate({
-      path: "cards",
-      select: "date type",
-    });
-    res.json(users);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-});
-
-/* app.post("/api/user", async (req, res) => {
-  const user = new User(req.body);
-  try {
-    const newUser = await user.save();
-    res.status(201).json(newUser);
-  } catch (err) {
-    res.status(400).json({ message: err.message });
-  }
-}); */
-
 const cardSchema = new Schema(
   {
     user: { type: Schema.Types.ObjectId, ref: "User", required: true },
