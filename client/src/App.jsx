@@ -6,6 +6,7 @@ import Navbar from "./Components/Navbar";
 
 function App() {
   const [data, setData] = useState({});
+  const [user, setUser] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,8 +23,9 @@ function App() {
 
   return (
     <div>
+      <h1> Welcome {user.username} </h1>
       {data.name}
-      <SignUp />
+      <SignUp setUser={setUser} />
       <Landing data={data} />
       <Navbar />
     </div>

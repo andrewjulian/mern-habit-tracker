@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const SignUp = () => {
+const SignUp = ({ setUser }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
@@ -22,7 +22,7 @@ const SignUp = () => {
       });
 
       const data = await response.json();
-      console.log(data);
+      setUser(data);
     } catch (error) {
       console.error(error);
     }
