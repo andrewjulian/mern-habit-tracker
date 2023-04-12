@@ -4,6 +4,8 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 require("dotenv").config();
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+
 const { Schema } = mongoose;
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -15,6 +17,7 @@ const listener = app.listen(process.env.PORT || 3000, () => {
 
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
 
 const uri = process.env.ATLAS_URI;
 
