@@ -63,12 +63,26 @@ exports.login = async (req, res, next) => {
     } else {
       // comparing given password with hashed password
       bcrypt.compare(password, user.password).then(function (result) {
-        result
-          ? res.status(200).json({
-              message: "Login successful",
-              user,
-            })
-          : res.status(400).json({ message: "Login not succesful" });
+        if (result) {
+          const maxAge = 3 * 60 * 60;
+          const token = jwt.sign(
+            { id: user._id, username, role: user.role },
+            jwtSecret,
+            {
+              expiresIn: maxAge, // 3hrs in sec
+            }
+          );
+          res.cookie("jwt", token, {
+            httpOnly: true,
+            maxAge: maxAge * 1000, // 3hrs in ms
+          });
+          res.status(201).json({
+            message: "User successfully Logged in",
+            user: user._id,
+          });
+        } else {
+          res.status(400).json({ message: "Login not succesful" });
+        }
       });
     }
   } catch (error) {
