@@ -3,6 +3,7 @@ import "./App.css";
 import Landing from "./Components/Landing";
 import SignUp from "./Components/SignUp";
 import Navbar from "./Components/Navbar";
+import Login from "./Components/Login";
 
 function App() {
   const [user, setUser] = useState({});
@@ -28,6 +29,7 @@ function App() {
     <div>
       <h1> Welcome {user.username} </h1>
       <SignUp setUser={setUser} />
+      <Login setUser={setUser} />
       <Landing />
       <Navbar />
     </div>
