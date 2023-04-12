@@ -30,22 +30,6 @@ mongoose
     console.error("Error connecting to MongoDB Atlas:", error);
   });
 
-/* app.get("/api/home", (req, res) => {
-  res.json({
-    name: "John Doe",
-    age: 30,
-  });
-}); */
-
-/* const userSchema = new Schema(
-  {
-    username: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-    email: { type: String, required: true },
-  },
-  { timestamps: true }
-); */
-
 app.use("/api/auth", require("./Auth/route"));
 
 const cardSchema = new Schema(
