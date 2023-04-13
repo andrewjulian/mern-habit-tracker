@@ -1,4 +1,5 @@
 const Card = require("../model/Card");
+const User = require("../model/User");
 
 exports.addCard = async (req, res) => {
   const { user, date, type, highlight, should_do, could_do } = req.body;
@@ -25,7 +26,7 @@ exports.addCard = async (req, res) => {
 
 exports.getCards = async (req, res) => {
   try {
-    const cards = await Card.find();
+    const cards = await User.findById(req.params.id).populate("cards");
     res.status(200).json({
       message: "Cards successfully retrieved",
       cards,
@@ -40,7 +41,8 @@ exports.getCards = async (req, res) => {
 
 exports.getCard = async (req, res) => {
   try {
-    const card = await Card.findById(req.params.id);
+    const user = await User.findById(req.params.id);
+    const card = await user.cards.id(req.params.cardId);
     res.status(200).json({
       message: "Card successfully retrieved",
       card,
@@ -55,7 +57,8 @@ exports.getCard = async (req, res) => {
 
 exports.updateCard = async (req, res) => {
   try {
-    const card = await Card.findById(req.params.id);
+    const user = await User.findById(req.params.id);
+    const card = user.cards.id(req.params.cardId);
     if (card) {
       const { user, date, type, highlight, should_do, could_do } = req.body;
       const updatedCard = await Card.findByIdAndUpdate(
@@ -85,7 +88,8 @@ exports.updateCard = async (req, res) => {
 
 exports.deleteCard = async (req, res) => {
   try {
-    const card = await Card.findById(req.params.id);
+    const user = await User.findById(req.params.id);
+    const card = user.cards.id(req.params.cardId);
     if (card) {
       await card.remove();
       res.status(200).json({
