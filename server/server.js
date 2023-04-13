@@ -34,36 +34,9 @@ mongoose
   });
 
 app.use("/api/auth", require("./Auth/route"));
+app.use("/api/card", require("./Card/route"));
 
-const cardSchema = new Schema(
-  {
-    user: { type: Schema.Types.ObjectId, ref: "User", required: true },
-    date: { type: Date, required: true },
-    type: { type: String, required: true },
-    highlight: { type: String, required: true },
-    should_do: { type: Array }, //array of strings
-    could_do: { type: Array }, //array of strings
-  },
-  { timestamps: true }
-);
-
-app.post("/api/card", async (req, res) => {
-  const card = new Card(req.body);
-  try {
-    const newCard = await card.save();
-    res.status(201).json(newCard);
-  } catch (err) {
-    res.status(400).json({ message: err.message });
-  }
-});
-
-const Card = mongoose.model("Card", cardSchema);
-
-app.get("/api/card", async (req, res) => {
-  try {
-    const cards = await Card.find();
-    res.json(cards);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
+app.get("/logout", (req, res) => {
+  res.cookie("jwt", "", { maxAge: 1 });
+  res.redirect("/");
 });
