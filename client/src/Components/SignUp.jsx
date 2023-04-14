@@ -9,7 +9,7 @@ const SignUp = ({ setUser }) => {
     e.preventDefault();
     console.log("running");
     try {
-      const response = await fetch("/api/auth/register", {
+      const response = await fetch("http://localhost:3000/api/auth/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -22,7 +22,7 @@ const SignUp = ({ setUser }) => {
       });
 
       const data = await response.json();
-      setUser(data);
+      console.log(data);
     } catch (error) {
       console.error(error);
     }

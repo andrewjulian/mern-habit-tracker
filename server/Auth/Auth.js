@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const jwtSecret = process.env.JWT_SECRET;
 
-exports.register = async (req, res, next) => {
+exports.signup = async (req, res, next) => {
   const { username, password, email } = req.body;
   try {
     bcrypt.hash(password, 10).then(async (hash) => {
@@ -62,8 +62,13 @@ exports.login = async (req, res, next) => {
       });
     } else {
       // comparing given password with hashed password
-      bcrypt.compare(password, user.password).then(function (result) {
-        if (result) {
+      bcrypt.compare(password, user.password).then((isMatch) => {
+        if (!isMatch) {
+          res.status(400).json({
+            message: "Login not successful",
+            error: "Invalid credentials",
+          });
+        } else {
           const maxAge = 3 * 60 * 60;
           const token = jwt.sign(
             { id: user._id, username, role: user.role },
@@ -76,12 +81,10 @@ exports.login = async (req, res, next) => {
             httpOnly: true,
             maxAge: maxAge * 1000, // 3hrs in ms
           });
-          res.status(201).json({
-            message: "User successfully Logged in",
+          res.status(200).json({
+            message: "Login successful",
             user: user._id,
           });
-        } else {
-          res.status(400).json({ message: "Login not succesful" });
         }
       });
     }

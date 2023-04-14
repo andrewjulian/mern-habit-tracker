@@ -1,9 +1,11 @@
-import { useState, useEffect } from "react";
+import { useEffect, useContext } from "react";
 import "./App.css";
 import { Outlet } from "react-router-dom";
+import { UserContext } from "./Context/userContext";
 
 function App() {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useContext(UserContext);
+  let users = [];
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -14,7 +16,7 @@ function App() {
           },
         });
         const data = await response.json();
-        setUser(data);
+        users = data;
       } catch (error) {
         console.error(error);
       }
@@ -24,6 +26,7 @@ function App() {
 
   return (
     <div>
+      {users}
       <Outlet />
     </div>
   );

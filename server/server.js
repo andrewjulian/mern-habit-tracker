@@ -6,8 +6,6 @@ require("dotenv").config();
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 
-const { Schema } = mongoose;
-
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -33,8 +31,8 @@ mongoose
     console.error("Error connecting to MongoDB Atlas:", error);
   });
 
-app.use("/api/auth", require("./Auth/route"));
-app.use("/api/card", require("./Cards/route"));
+app.use("/api/auth", require("./Auth/Route"));
+app.use("/api/card", require("./Cards/Route"));
 
 app.get("/logout", (req, res) => {
   res.cookie("jwt", "", { maxAge: 1 });

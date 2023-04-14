@@ -1,27 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { UserContext } from "../Context/userContext";
 
-const Login = ({ setUser }) => {
-  const [email, setEmail] = useState("");
+const Login = () => {
+  const { user, setUser } = useContext(UserContext);
+
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("/api/auth/login", {
+      const response = await fetch("http://localhost:3000/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email,
+          username,
           password,
         }),
       });
 
       const data = await response.json();
-      setUser(data);
+      console.log(data);
 
-      setEmail("");
+      setUsername("");
       setPassword("");
     } catch (error) {
       console.error(error);
@@ -32,13 +35,13 @@ const Login = ({ setUser }) => {
     <div>
       <h1>Login</h1>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="email">Email</label>
+        <label htmlFor="username">Username</label>
         <input
-          onChange={(e) => setEmail(e.target.value)}
-          type="email"
-          name="email"
-          id="email"
-          value={email}
+          onChange={(e) => setUsername(e.target.value)}
+          type="text"
+          name="username"
+          id="username"
+          value={username}
         />
         <label htmlFor="password">Password</label>
         <input
