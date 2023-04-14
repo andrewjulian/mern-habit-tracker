@@ -34,7 +34,7 @@ mongoose
   });
 
 app.use("/api/auth", require("./Auth/route"));
-app.use("/api/card", require("./Card/route"));
+app.use("/api/card", require("./Cards/route"));
 
 app.get("/logout", (req, res) => {
   res.cookie("jwt", "", { maxAge: 1 });
