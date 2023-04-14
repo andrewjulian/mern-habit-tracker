@@ -50,7 +50,7 @@ const Login = ({ setUser }) => {
         />
         <button type="submit">Login</button>
       </form>
-      <a href="/register">Don't have an accout? Register</a>
+      <a href="/signup">Don't have an accout? Register</a>
     </div>
   );
 };

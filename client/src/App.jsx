@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import Landing from "./Components/Landing";
-import SignUp from "./Components/SignUp";
-import Navbar from "./Components/Navbar";
-import Login from "./Components/Login";
+import { Outlet } from "react-router-dom";
 
 function App() {
   const [user, setUser] = useState({});
@@ -27,11 +24,7 @@ function App() {
 
   return (
     <div>
-      <h1> Welcome {user.username} </h1>
-      <SignUp setUser={setUser} />
-      <Login setUser={setUser} />
-      <Landing />
-      <Navbar />
+      <Outlet />
     </div>
   );
 }
