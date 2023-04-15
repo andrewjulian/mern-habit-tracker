@@ -6,6 +6,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./Components/Login";
 import Signup from "./Components/Signup";
 import Navbar from "./Components/Navbar";
+import Landing from "./Components/Landing";
 
 function App() {
   const [user, setUser] = useContext(UserContext);
@@ -32,7 +33,7 @@ function App() {
   return (
     <div>
       <Navbar />
-      {user ? (
+      {{ user } ? (
         <Landing />
       ) : (
         <Routes>
