@@ -33,8 +33,3 @@ mongoose
 
 app.use("/api/auth", require("./Auth/Route"));
 app.use("/api/card", require("./Cards/Route"));
-
-app.get("/logout", (req, res) => {
-  res.cookie("jwt", "", { maxAge: 1 });
-  res.redirect("/");
-});

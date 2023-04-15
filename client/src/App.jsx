@@ -1,48 +1,72 @@
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useNavigate } from "react";
 import "./App.css";
 import { UserContext } from "./Context/userContext";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./Components/Login";
-import SignUp from "./Components/SignUp";
+import Signup from "./Components/Signup";
 import Navbar from "./Components/Navbar";
 import Landing from "./Components/Landing";
 
 function App() {
   const [user, setUser] = useContext(UserContext);
 
+  function logout() {
+    try {
+      const logoutrequest = async () => {
+        const res = await fetch("http://localhost:3000/api/auth/logout");
+        const data = await res.json();
+        if (data) {
+          localStorage.removeItem("token");
+          setUser(null);
+          useNavigate("/");
+          console.log("logout");
+        }
+      };
+      logoutrequest();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  console.log("user", user);
+
   useEffect(() => {
     const token = localStorage.getItem("token");
-    if (token) {
-      fetch("http://localhost:3000/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.success) {
-            setUser(data.user);
-          }
-        });
+    try {
+      if (token) {
+        const login = async () => {
+          await fetch("http://localhost:3000/api/auth/userAuth")
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.success) {
+                setUser(data.user);
+              }
+            });
+        };
+        login();
+      }
+    } catch (error) {
+      console.log(error);
     }
-  }, []);
+  }, [setUser, user]);
+
+  if (!user)
+    return (
+      <div>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </div>
+    );
 
   return (
     <div>
-      <Navbar />
-      {{ user } ? (
-        <Routes>
-          <Route path="/" element={<Landing />} />
-        </Routes>
-      ) : (
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/" element={<Login />} />
-        </Routes>
-      )}
+      <Navbar logout={logout} />
+      <Routes>
+        <Route path="*" element={<Landing />} />
+      </Routes>
     </div>
   );
 }

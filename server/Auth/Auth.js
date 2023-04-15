@@ -126,3 +126,35 @@ exports.deleteUser = async (req, res, next) => {
         .json({ message: "An error occurred", error: error.message })
     );
 };
+
+exports.logout = async (req, res, next) => {
+  try {
+    await res.cookie("jwt", "", { maxAge: 1 });
+    res.status(200).json({ message: "Logout successful" });
+  } catch (error) {
+    res
+      .status(400)
+      .json({ message: "An error occurred", error: error.message });
+  }
+};
+
+exports.userAuth = async (req, res, next) => {
+  try {
+    const token = req.cookies.jwt;
+    if (token) {
+      jwt.verify(token, jwtSecret, (err, decodedToken) => {
+        if (err) {
+          return res.status(400).json({ message: "An error occurred" });
+        } else {
+          next();
+        }
+      });
+    } else {
+      return res.status(400).json({ message: "An error occurred" });
+    }
+  } catch (error) {
+    res
+      .status(400)
+      .json({ message: "An error occurred", error: error.message });
+  }
+};
