@@ -7,10 +7,10 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:3000/api/auth/login", {
+      fetch("http://localhost:3000/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -19,15 +19,19 @@ const Login = () => {
           username,
           password,
         }),
-      });
-
-      const data = await response.json();
-      console.log(data);
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.success) {
+            localStorage.setItem("token", data.token);
+            setUser(data.user);
+          }
+        });
 
       setUsername("");
       setPassword("");
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   };
 

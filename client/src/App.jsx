@@ -5,14 +5,44 @@ import { UserContext } from "./Context/userContext";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./Components/Login";
 import Signup from "./Components/Signup";
-import Home from "./Components/Home";
 import Navbar from "./Components/Navbar";
-import Profile from "./Components/Profile";
 
 function App() {
   const [user, setUser] = useContext(UserContext);
 
-  return <div></div>;
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      fetch("http://localhost:3000/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.success) {
+            setUser(data.user);
+          }
+        });
+    }
+  }, []);
+
+  return (
+    <div>
+      <Navbar />
+      {user ? (
+        <Landing />
+      ) : (
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/" element={<Login />} />
+        </Routes>
+      )}
+    </div>
+  );
 }
 
 export default App;
