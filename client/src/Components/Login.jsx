@@ -9,6 +9,7 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("running");
     try {
       fetch("http://localhost:3000/api/auth/login", {
         method: "POST",

@@ -1,10 +1,9 @@
 import { useEffect, useContext } from "react";
 import "./App.css";
-import { Outlet } from "react-router-dom";
 import { UserContext } from "./Context/userContext";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./Components/Login";
-import Signup from "./Components/Signup";
+import SignUp from "./Components/SignUp";
 import Navbar from "./Components/Navbar";
 import Landing from "./Components/Landing";
 
@@ -34,11 +33,13 @@ function App() {
     <div>
       <Navbar />
       {{ user } ? (
-        <Landing />
+        <Routes>
+          <Route path="/" element={<Landing />} />
+        </Routes>
       ) : (
         <Routes>
           <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
+          <Route path="/signup" element={<SignUp />} />
           <Route path="/" element={<Login />} />
         </Routes>
       )}
