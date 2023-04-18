@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import logo from "../assets/refresco.png";
 
 const SignUp = ({ setUser }) => {
@@ -94,6 +95,14 @@ const SignUp = ({ setUser }) => {
             Sign Up
           </button>
         </form>
+        <div className="text-sm">
+          <Link
+            to="/login"
+            className="font-medium text-[#7e6e45] hover:text-[#605e4d]"
+          >
+            Already have an account?
+          </Link>
+        </div>
       </div>
     </div>
   );
