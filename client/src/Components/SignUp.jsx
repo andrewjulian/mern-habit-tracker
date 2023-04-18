@@ -55,7 +55,7 @@ const SignUp = ({ setUser }) => {
               name="email"
               id="email"
               value={email}
-              className=" pl-2 relative block w-full rounded-t-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-[#605e4d]  placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-[#605e4d] sm:text-sm sm:leading-6"
+              className="pl-2 relative block w-full rounded-t-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-[#605e4d]  placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-[#605e4d] sm:text-sm sm:leading-6"
               placeholder="Email Address"
             />
           </div>
