@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import logo from "../assets/refresco.png";
 
 const SignUp = ({ setUser }) => {
   const [email, setEmail] = useState("");
@@ -33,14 +34,14 @@ const SignUp = ({ setUser }) => {
   };
 
   return (
-    <div className="flex min-h-full items-center justify-center px-4 py-12 mt-[100px] sm:px-6 lg:px-8">
-      <div className="w-full max-w-md space-y-8">
+    <div className="flex min-h-full items-center justify-center px-4 py-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-md space-y-4">
         <img
-          className="mx-auto h-12 w-auto"
-          src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-          alt="Your Company"
+          className="mx-auto h-[400px] w-auto"
+          src={logo}
+          alt="Digital: Thoughtful Planning"
         />
-        <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
+        <h2 className="text-center text-3xl font-bold tracking-tight text-gray-900">
           Sign in to your account
         </h2>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
@@ -54,7 +55,7 @@ const SignUp = ({ setUser }) => {
               name="email"
               id="email"
               value={email}
-              className="relative block w-full rounded-t-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              className=" pl-2 relative block w-full rounded-t-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-[#605e4d]  placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-[#605e4d] sm:text-sm sm:leading-6"
               placeholder="Email Address"
             />
           </div>
@@ -68,7 +69,7 @@ const SignUp = ({ setUser }) => {
               name="password"
               id="password"
               value={password}
-              className="relative block w-full rounded-t-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              className="pl-2 relative block w-full rounded-t-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-[#605e4d]  placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-[#605e4d] sm:text-sm sm:leading-6"
               placeholder="Password"
             />
           </div>
@@ -82,12 +83,12 @@ const SignUp = ({ setUser }) => {
               name="username"
               id="username"
               value={username}
-              className="relative block w-full rounded-b-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              className="pl-2 relative block w-full rounded-b-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-[#605e4d]  placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-[#605e4d] sm:text-sm sm:leading-6"
               placeholder="Create Username"
             />
           </div>
           <button
-            className="group relative flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            className="group relative flex w-full justify-center rounded-md bg-[#7e6e45] px-3 py-2 text-sm font-semibold text-white hover:bg-[#605e4d] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7e6e45]"
             type="submit"
           >
             Sign Up
