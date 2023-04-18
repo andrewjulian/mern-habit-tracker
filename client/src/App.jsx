@@ -3,7 +3,7 @@ import "./App.css";
 import { UserContext } from "./Context/userContext";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./Components/Login";
-import Signup from "./Components/Signup";
+import Signup from "./Components/SignUp";
 import Navbar from "./Components/Navbar";
 import Landing from "./Components/Landing";
 
@@ -54,9 +54,9 @@ function App() {
     return (
       <div>
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="*" element={<Navigate to="/" />} />
+          <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
       </div>
     );

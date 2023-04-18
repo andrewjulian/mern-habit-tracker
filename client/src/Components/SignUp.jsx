@@ -43,7 +43,7 @@ const SignUp = ({ setUser }) => {
           alt="Digital: Thoughtful Planning"
         />
         <h2 className="text-center text-3xl font-bold tracking-tight text-gray-900">
-          Sign in to your account
+          Create your account!
         </h2>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="-space-y-px rounded-md shadow-sm">
@@ -92,7 +92,7 @@ const SignUp = ({ setUser }) => {
             className="group relative flex w-full justify-center rounded-md bg-[#7e6e45] px-3 py-2 text-sm font-semibold text-white hover:bg-[#605e4d] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7e6e45]"
             type="submit"
           >
-            Sign Up
+            Sign Up!
           </button>
         </form>
         <div className="text-sm">
