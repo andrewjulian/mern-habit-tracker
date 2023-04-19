@@ -6,6 +6,7 @@ const SignUp = ({ setUser }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
+  const [errors, setErrors] = useState([]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,11 +23,16 @@ const SignUp = ({ setUser }) => {
           username,
         }),
       });
-
-      const data = await response.json();
-      console.log(data);
+      if (response.status === 400) {
+        const data = await response.json();
+        setErrors([data.message]);
+        return;
+      } else {
+        const data = await response.json();
+        setUser(data.user);
+      }
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
 
     setEmail("");
@@ -94,6 +100,13 @@ const SignUp = ({ setUser }) => {
           >
             Sign Up!
           </button>
+          {errors.length > 0 && (
+            <ul style={{ color: "red" }}>
+              {errors.map((error) => (
+                <li key={error}>{error}</li>
+              ))}
+            </ul>
+          )}
         </form>
         <div className="text-sm">
           <Link
