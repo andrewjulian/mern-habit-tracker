@@ -32,7 +32,7 @@ exports.signup = async (req, res, next) => {
         })
         .catch((error) =>
           res.status(400).json({
-            message: "User not successful created",
+            message: "Incomplete User Data",
             error: error.message,
           })
         );

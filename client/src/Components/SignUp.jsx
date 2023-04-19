@@ -58,6 +58,7 @@ const SignUp = ({ setUser }) => {
             </label>
             <input
               onChange={(e) => setEmail(e.target.value)}
+              required
               type="email"
               name="email"
               id="email"
@@ -73,6 +74,7 @@ const SignUp = ({ setUser }) => {
             <input
               onChange={(e) => setPassword(e.target.value)}
               type="password"
+              required
               name="password"
               id="password"
               value={password}
@@ -89,6 +91,7 @@ const SignUp = ({ setUser }) => {
               type="text"
               name="username"
               id="username"
+              required
               value={username}
               className="pl-2 relative block w-full rounded-b-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-[#605e4d]  placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-[#605e4d] sm:text-sm sm:leading-6"
               placeholder="Create Username"
