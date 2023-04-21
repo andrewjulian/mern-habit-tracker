@@ -46,16 +46,14 @@ const Card = () => {
               </div>
               <div className=" items-center">
                 <h3 className="text-gray-600 text-md my-2 mr-5">Highlight:</h3>
-                <div className="flex align-middle">
-                  <div className="flex items-center justify-between">
+                <div className="flex align-middle justify-between">
+                  <div className="flex items-center">
                     {displayStatus}
                     <h1 className="text-decoration-line">
                       The Highlight will go here
                     </h1>
                   </div>
-                  <div>
-                    <BiEdit color={"blue"} size={25} />
-                  </div>
+                  <BiEdit color={"#7e6e45"} size={25} />
                 </div>
               </div>
             </div>
