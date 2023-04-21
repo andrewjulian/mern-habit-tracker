@@ -35,11 +35,10 @@ const Card = () => {
         <div className="w-[350px] h-[500px] bg-white shadow-lg rounded-lg overflow-hidden">
           <div className="w-full h-56 bg-cover bg-center">
             <div className="w-full px-4 py-4 bg-white">
-              <h1 className="text-gray-900 font-bold text-2xl">Card Title</h1>
               <div className="flex items-center justify-left">
-                <h3 className="text-gray-600 text-md mt-1 mr-5">Date: </h3>
+                <h3 className="text-gray-600 text-2xl mt-1 mr-5">Date: </h3>
                 <DatePicker
-                  className="text-gray-600 text-md mt-1"
+                  className="text-gray-600 text-m2xld mt-1"
                   selected={startDate}
                   onChange={(date) => setStartDate(date)}
                 />
@@ -54,6 +53,74 @@ const Card = () => {
                     </h1>
                   </div>
                   <BiEdit color={"#7e6e45"} size={25} />
+                </div>
+              </div>
+              <div className=" items-center">
+                <h3 className="text-gray-600 text-md my-2 mr-5">Should Do:</h3>
+                <div className="flex align-middle justify-between">
+                  <div className="flex items-center">
+                    {displayStatus}
+                    <h1 className="text-decoration-line">
+                      The Highlight will go here
+                    </h1>
+                  </div>
+                  <BiEdit color={"#7e6e45"} size={25} />
+                </div>
+                <div className="flex align-middle justify-between">
+                  <div className="flex items-center">
+                    {displayStatus}
+                    <h1 className="text-decoration-line">
+                      The Highlight will go here
+                    </h1>
+                  </div>
+                  <BiEdit color={"#7e6e45"} size={25} />
+                </div>
+                <div className="flex align-middle justify-between">
+                  <div className="flex items-center">
+                    {displayStatus}
+                    <h1 className="text-decoration-line">
+                      The Highlight will go here
+                    </h1>
+                  </div>
+                  <BiEdit color={"#7e6e45"} size={25} />
+                </div>
+              </div>
+              <div className=" items-center">
+                <h3 className="text-gray-600 text-md my-2 mr-5">Could Do:</h3>
+                <div className="flex align-middle justify-between">
+                  <div className="flex items-center">
+                    {displayStatus}
+                    <h1 className="text-decoration-line">
+                      The Highlight will go here
+                    </h1>
+                  </div>
+                  <BiEdit color={"#7e6e45"} size={25} />
+                </div>
+                <div className="flex align-middle justify-between">
+                  <div className="flex items-center">
+                    {displayStatus}
+                    <h1 className="text-decoration-line">
+                      The Highlight will go here
+                    </h1>
+                  </div>
+                  <BiEdit color={"#7e6e45"} size={25} />
+                </div>
+                <div className="flex align-middle justify-between">
+                  <div className="flex items-center">
+                    {displayStatus}
+                    <h1 className="text-decoration-line">
+                      The Highlight will go here
+                    </h1>
+                  </div>
+                  <BiEdit color={"#7e6e45"} size={25} />
+                </div>
+              </div>
+              <div className=" items-center">
+                <h3 className="text-gray-600 text-md my-2 mr-5">Summary:</h3>
+                <div className="border border-[#7e6e45]">
+                  <textarea className="w-full h-24 p-2">
+                    The summary will go here
+                  </textarea>
                 </div>
               </div>
             </div>
