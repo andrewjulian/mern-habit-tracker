@@ -6,6 +6,7 @@ import Login from "./Components/Login";
 import Signup from "./Components/SignUp";
 import Navbar from "./Components/Navbar";
 import Landing from "./Components/Landing";
+import Card from "./Components/Card";
 
 function App() {
   const [user, setUser] = useContext(UserContext);
@@ -56,6 +57,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/card" element={<Card />} />
           <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
       </div>
