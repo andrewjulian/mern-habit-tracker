@@ -38,7 +38,7 @@ const Card = () => {
               <div className="flex items-center justify-left">
                 <h3 className="text-gray-600 text-2xl mt-1 mr-5">Date: </h3>
                 <DatePicker
-                  className="text-gray-600 text-m2xld mt-1"
+                  className="text-gray-600 text-2xl mt-1"
                   selected={startDate}
                   onChange={(date) => setStartDate(date)}
                 />
