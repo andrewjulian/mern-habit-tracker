@@ -6,7 +6,7 @@ import { AiFillCheckCircle } from "react-icons/ai";
 import { BsArrowRightCircleFill } from "react-icons/bs";
 import { IoPeopleCircleOutline } from "react-icons/io5";
 import { BsCircleHalf } from "react-icons/bs";
-import { BsXCircle } from "react-icons/bs";
+import { AiFillCloseCircle } from "react-icons/ai";
 
 const CardTasks = () => {
   const [status, setStatus] = useState(0);
@@ -26,6 +26,12 @@ const CardTasks = () => {
       size={22}
       className="ml-2 mr-1.5"
     />,
+    <IoPeopleCircleOutline
+      onClick={handleStatus}
+      size={22}
+      className="ml-2 mr-1.5"
+    />,
+    <BsCircleHalf onClick={handleStatus} size={18} className="ml-2.5 mr-2" />,
     <AiFillCheckCircle
       onClick={handleStatus}
       size={22}
@@ -36,13 +42,11 @@ const CardTasks = () => {
       size={18}
       className="ml-2.5 mr-2"
     />,
-    <IoPeopleCircleOutline
+    <AiFillCloseCircle
       onClick={handleStatus}
-      size={22}
-      className="ml-2 mr-1.5"
+      size={20}
+      className="ml-2.5 mr-1.5"
     />,
-    <BsCircleHalf onClick={handleStatus} size={18} className="ml-2.5 mr-2" />,
-    <BsXCircle onClick={handleStatus} size={18} className="ml-2.5 mr-2" />,
   ];
 
   const displayStatus = statusButton[status];
