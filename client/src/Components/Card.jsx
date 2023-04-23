@@ -4,6 +4,7 @@ import CardTasks from "./CardTasks";
 
 const Card = () => {
   const [startDate, setStartDate] = useState(new Date());
+
   const tasks = [
     {
       id: 1,
