@@ -7,9 +7,11 @@ import { BsArrowRightCircleFill } from "react-icons/bs";
 import { IoPeopleCircleOutline } from "react-icons/io5";
 import { BsCircleHalf } from "react-icons/bs";
 import { AiFillCloseCircle } from "react-icons/ai";
+import { BiSave } from "react-icons/bi";
 
-const CardTasks = () => {
+const CardTasks = ({ task }) => {
   const [status, setStatus] = useState(0);
+  const [edit, setEdit] = useState(false);
 
   const handleStatus = () => {
     if (status === statusButton.length - 1) {
@@ -17,6 +19,10 @@ const CardTasks = () => {
     } else {
       setStatus(status + 1);
     }
+  };
+
+  const toggleEdit = () => {
+    setEdit(!edit);
   };
 
   const statusButton = [
@@ -50,6 +56,25 @@ const CardTasks = () => {
   ];
 
   const displayStatus = statusButton[status];
+
+  if (edit) {
+    return (
+      <div>
+        <div className="flex align-middle justify-between my-1 py-3 border-b border-[#7e6e45]">
+          <div className="flex items-center">
+            <input
+              className="w-56 h-6 rounded-md border-[#7e6e45] border-2"
+              type="text"
+              value={task.task}
+              onChange={(e) => task.task(e.target.value)}
+            />
+          </div>
+          <BiSave onClick={toggleEdit} color={"#7e6e45"} size={25} />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div>
       <div className="flex align-middle justify-between my-1 py-3 border-b border-[#7e6e45]">
@@ -57,7 +82,7 @@ const CardTasks = () => {
           {displayStatus}
           <h1>The Highlight will go here</h1>
         </div>
-        <BiEdit color={"#7e6e45"} size={25} />
+        <BiEdit onClick={toggleEdit} color={"#7e6e45"} size={25} />
       </div>
     </div>
   );
