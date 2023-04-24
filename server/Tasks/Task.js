@@ -35,3 +35,28 @@ exports.getTasks = async (req, res) => {
     });
   }
 };
+
+exports.deleteTask = async (req, res) => {
+  try {
+    const user = await user.findById(req.params.id);
+    const task = user.tasks.id(req.params.taskId);
+    if (task) {
+      await task.remove();
+      await user.save();
+      res.status(200).json({
+        message: "Task successfully deleted",
+        task,
+      });
+    } else {
+      res.status(400).json({
+        message: "Task not successful deleted",
+        error: error.message,
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
+      message: "Task not successful deleted",
+      error: error.message,
+    });
+  }
+};
