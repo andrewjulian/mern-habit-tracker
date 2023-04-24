@@ -60,3 +60,37 @@ exports.deleteTask = async (req, res) => {
     });
   }
 };
+
+exports.updateTask = async (req, res) => {
+  try {
+    const user = await user.findById(req.params.id);
+    const task = user.tasks.id(req.params.taskId);
+    if (task) {
+      const { user, card, status, text } = req.body;
+      const updatedTask = await Task.findByIdAndUpdate(
+        req.params.taskId,
+        {
+          user,
+          card,
+          status,
+          text,
+        },
+        { new: true }
+      );
+      res.status(200).json({
+        message: "Task successfully updated",
+        task: updatedTask,
+      });
+    } else {
+      res.status(400).json({
+        message: "Task not successful updated",
+        error: error.message,
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
+      message: "Task not successful updated",
+      error: error.message,
+    });
+  }
+};
