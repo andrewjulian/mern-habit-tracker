@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { addCard, getCards, deleteCard, updateCard } = require("./Manage");
+const { addCard, getCards, deleteCard, updateCard } = require("./Card");
 
 router.route("/addCard").post(addCard);
 module.exports = router;

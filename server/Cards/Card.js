@@ -1,4 +1,4 @@
-const Card = require("../model/Card");
+const Card = require("../model/CardModel");
 
 exports.addCard = async (req, res) => {
   const { user, date, type, highlight, should_do, could_do } = req.body;
