@@ -20,3 +20,18 @@ exports.addTask = async (req, res) => {
     });
   }
 };
+
+exports.getTasks = async (req, res) => {
+  try {
+    const tasks = await User.findById(req.params.id).populate("tasks");
+    res.status(200).json({
+      message: "Tasks successfully retrieved",
+      tasks,
+    });
+  } catch (error) {
+    res.status(400).json({
+      message: "Tasks not successful retrieved",
+      error: error.message,
+    });
+  }
+};
