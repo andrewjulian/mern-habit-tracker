@@ -5,7 +5,7 @@ const taskSchema = new Schema(
   {
     user: { type: Schema.Types.ObjectId, ref: "User", required: true },
     card: { type: Schema.Types.ObjectId, ref: "Card", required: true },
-    status: { type: int, required: true },
+    status: { type: Number, required: true },
     text: { type: String, required: true },
   },
   { timestamps: true }
