@@ -100,7 +100,6 @@ exports.login = async (req, res, next) => {
 
 exports.getUsers = async (req, res, next) => {
   const { id } = req.params;
-  const user = await User.findById(ObjectId(id));
   try {
     const users = await User.find();
     res.status(200).json({

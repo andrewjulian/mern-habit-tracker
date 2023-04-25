@@ -1,16 +1,18 @@
 const Card = require("../model/CardModel");
+const ObjectId = mongoose.Types.ObjectId;
+const mongoose = require("mongoose");
 
 exports.addCard = async (req, res) => {
   const { user, date, type } = req.body;
   try {
-    const newCard = await Card.create({
+    const card = await Card.create({
       user,
       date,
       type,
     });
     res.status(201).json({
       message: "Card successfully created",
-      card: newCard,
+      card,
     });
   } catch (error) {
     res.status(400).json({
@@ -21,8 +23,9 @@ exports.addCard = async (req, res) => {
 };
 
 exports.getCards = async (req, res) => {
+  const user = await user.findById(ObjectId(req.params.id));
   try {
-    const cards = await User.findById(req.params.id).populate("cards");
+    const cards = await Card.find({ user: user._id });
     res.status(200).json({
       message: "Cards successfully retrieved",
       cards,
