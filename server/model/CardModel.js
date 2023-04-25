@@ -9,7 +9,7 @@ const cardSchema = new Schema(
   { timestamps: true }
 );
 
-cardSchema.virtual("tasks", {
+cardSchema.virtual("cardTasks", {
   ref: "Task",
   localField: "_id",
   foreignField: "card",
