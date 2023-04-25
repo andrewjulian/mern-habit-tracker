@@ -1,7 +1,9 @@
 const User = require("../model/UserModel");
+const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const jwtSecret = process.env.JWT_SECRET;
+const ObjectId = mongoose.Types.ObjectId;
 
 exports.signup = async (req, res, next) => {
   const { username, password, email } = req.body;
@@ -97,21 +99,21 @@ exports.login = async (req, res, next) => {
 };
 
 exports.getUsers = async (req, res, next) => {
-  await User.find({})
-    .then((users) => {
-      const userFunction = users.map((user) => {
-        const container = {};
-        container.username = user.username;
-        container.email = user.email;
-        container.password = user.password;
-        return container;
-      });
-      res.status(200).json({ user: userFunction });
-    })
-    .catch((err) =>
-      res.status(401).json({ message: "Not successful", error: err.message })
-    );
-};
+  const { id } = req.params;
+  const user = await User.findById(ObjectId(id));
+  try {
+    const users = await User.find();
+    res.status(200).json({
+      message: "Users successfully retrieved",
+      users,
+    });
+  } catch (error) {
+    res.status(400).json({
+      message: "An error occurred",
+      error: error.message,
+    });
+  }
+
 
 exports.deleteUser = async (req, res, next) => {
   const { id } = req.body;
@@ -157,4 +159,18 @@ exports.userAuth = async (req, res, next) => {
       .status(400)
       .json({ message: "An error occurred", error: error.message });
   }
+};
+
+exports.getUser = async (req, res, next) => {
+  const { id } = req.params;
+  const user = await User.findById(ObjectId(id));
+  if (!user) {
+    res.status(400).json({
+      message: "User not found",
+    });
+  }
+  res.status(200).json({
+    message: "User found",
+    user,
+  });
 };

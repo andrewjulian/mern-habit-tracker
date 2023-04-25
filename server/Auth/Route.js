@@ -7,6 +7,7 @@ const {
   deleteUser,
   logout,
   userAuth,
+  getUser,
 } = require("./Auth");
 
 router.route("/signup").post(signup);
@@ -25,4 +26,7 @@ router.route("/logout").get(logout);
 module.exports = router;
 
 router.route("/userAuth").get(userAuth);
+module.exports = router;
+
+router.route("/getUser/:id").get(getUser);
 module.exports = router;
