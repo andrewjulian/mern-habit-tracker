@@ -5,7 +5,6 @@ const cardSchema = new Schema(
   {
     user: { type: Schema.Types.ObjectId, ref: "User", required: true },
     date: { type: Date, required: true },
-    type: { type: String, required: true },
   },
   { timestamps: true }
 );

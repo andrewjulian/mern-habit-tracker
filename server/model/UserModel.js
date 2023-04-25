@@ -10,7 +10,7 @@ const userSchema = new Schema(
   { timestamps: true }
 );
 
-userSchema.virtual("cards", {
+userSchema.virtual("userCards", {
   ref: "Card",
   localField: "_id",
   foreignField: "user",
@@ -19,5 +19,5 @@ userSchema.virtual("cards", {
 userSchema.set("toJSON", { virtuals: true });
 userSchema.set("toObject", { virtuals: true });
 
-const User = mongoose.model("user", userSchema);
+const User = mongoose.model("User", userSchema);
 module.exports = User;
