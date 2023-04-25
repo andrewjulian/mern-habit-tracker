@@ -112,7 +112,7 @@ exports.getUsers = async (req, res, next) => {
       error: error.message,
     });
   }
-
+};
 
 exports.deleteUser = async (req, res, next) => {
   const { id } = req.body;

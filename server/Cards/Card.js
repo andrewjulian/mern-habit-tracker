@@ -1,6 +1,6 @@
 const Card = require("../model/CardModel");
-const ObjectId = mongoose.Types.ObjectId;
 const mongoose = require("mongoose");
+const ObjectId = mongoose.Types.ObjectId;
 
 exports.addCard = async (req, res) => {
   const { user, date, type } = req.body;
