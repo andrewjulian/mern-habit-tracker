@@ -3,14 +3,14 @@ const router = express.Router();
 
 const { addCard, getCards, deleteCard, updateCard } = require("./Card");
 
-router.route("/addCard").post(addCard);
+router.route("/addcard").post(addCard);
 module.exports = router;
 
-router.route("/getCards").get(getCards);
+router.route("/cards").get(getCards);
 module.exports = router;
 
-router.route("/updateCard").put(updateCard);
+router.route("/updatecard").put(updateCard);
 module.exports = router;
 
-router.route("/deleteCard").delete(deleteCard);
+router.route("/deletecard").delete(deleteCard);
 module.exports = router;

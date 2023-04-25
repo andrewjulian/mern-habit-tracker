@@ -3,14 +3,14 @@ const router = express.Router();
 
 const { addTask, getTasks, deleteTask, updateTask } = require("./Task");
 
-router.route("/addTask").post(addTask);
+router.route("/addtask").post(addTask);
 module.exports = router;
 
-router.route("/getTasks").get(getTasks);
+router.route("/gettasks").get(getTasks);
 module.exports = router;
 
-router.route("/updateTask").put(updateTask);
+router.route("/updatetask").put(updateTask);
 module.exports = router;
 
-router.route("/deleteTask").delete(deleteTask);
+router.route("/deletetask").delete(deleteTask);
 module.exports = router;

@@ -16,17 +16,17 @@ module.exports = router;
 router.route("/login").post(login);
 module.exports = router;
 
-router.route("/getUsers").get(getUsers);
+router.route("/users").get(getUsers);
 module.exports = router;
 
-router.route("/deleteUser").delete(deleteUser);
+router.route("/delete").delete(deleteUser);
 module.exports = router;
 
 router.route("/logout").get(logout);
 module.exports = router;
 
-router.route("/userAuth").get(userAuth);
+router.route("/userauth").get(userAuth);
 module.exports = router;
 
-router.route("/getUser/:id").get(getUser);
+router.route("/user/:id").get(getUser);
 module.exports = router;
