@@ -23,16 +23,15 @@ const SignUp = ({ setUser }) => {
           username,
         }),
       });
-      if (response.status === 400) {
-        const data = await response.json();
-        setErrors([data.message]);
-        return;
+      const data = await response.json();
+      console.log(data);
+      if (data.errors) {
+        setErrors(data.errors);
       } else {
-        const data = await response.json();
-        setUser(data.user);
+        setUser(data);
       }
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      console.log(err);
     }
 
     setEmail("");
