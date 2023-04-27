@@ -12,7 +12,7 @@ const SignUp = ({ setUser }) => {
     e.preventDefault();
     console.log("running");
     try {
-      const response = await fetch("http://localhost:3000/api/auth/signup", {
+      const response = await fetch("http://localhost:3000/api/user/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
