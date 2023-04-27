@@ -10,7 +10,7 @@ const passport = require("passport");
 const passportlocal = require("passport-local").Strategy;
 const session = require("express-session");
 
-const User = require("./User/Model");
+const User = require("./model/UserModel");
 
 const listener = app.listen(process.env.PORT || 3000, () => {
   console.log("Your app is listening on port " + listener.address().port);
@@ -32,7 +32,7 @@ mongoose
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use(cors({ origin: "http://127.0.0.1:5175/", credentials: true }));
+app.use(cors({ origin: "http://127.0.0.1:5175", credentials: true }));
 
 app.use(
   session({
@@ -45,7 +45,7 @@ app.use(
 app.use(cookieParser(uri));
 app.use(passport.initialize());
 app.use(passport.session());
-require("./User/PassportConfig")(passport);
+require("./PassportConfig")(passport);
 
 app.use("/api/user", require("./User/Route"));
 app.use("/api/card", require("./Cards/Route"));
