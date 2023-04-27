@@ -8,7 +8,7 @@ const {
   logout,
   userAuth,
   getUser,
-} = require("./Auth");
+} = require("./User");
 
 router.route("/signup").post(signup);
 module.exports = router;

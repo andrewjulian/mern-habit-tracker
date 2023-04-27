@@ -28,6 +28,6 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use("/api/auth", require("./Auth/Route"));
+app.use("/api/user", require("./User/Route"));
 app.use("/api/card", require("./Cards/Route"));
 //app.use("/api/task", require("./Tasks/Route"));
