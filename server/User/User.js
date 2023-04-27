@@ -1,8 +1,9 @@
 const User = require("../model/UserModel");
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
+const passport = require("passport");
 
-const login = async (req, res) => {
+const login = async (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
     if (err) throw err;
     if (!user) res.send("No User Exists");
