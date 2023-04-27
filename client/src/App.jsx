@@ -55,6 +55,7 @@ function App() {
     return (
       <div>
         <Routes>
+          <Route path="/landing" element={<Landing />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/card" element={<Card />} />
