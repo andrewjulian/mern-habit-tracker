@@ -11,46 +11,6 @@ import Card from "./Components/Card";
 function App() {
   const [user, setUser] = useContext(UserContext);
 
-  function logout() {
-    try {
-      const logoutrequest = async () => {
-        const res = await fetch("http://localhost:3000/api/auth/logout");
-        const data = await res.json();
-        if (data) {
-          localStorage.removeItem("token");
-          setUser(null);
-          useNavigate("/");
-          console.log("logout");
-        }
-      };
-      logoutrequest();
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  console.log("user", user);
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    try {
-      if (token) {
-        const login = async () => {
-          await fetch("http://localhost:3000/api/auth/userAuth")
-            .then((res) => res.json())
-            .then((data) => {
-              if (data.success) {
-                setUser(data.user);
-              }
-            });
-        };
-        login();
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }, [setUser, user]);
-
   if (!user)
     return (
       <div>
