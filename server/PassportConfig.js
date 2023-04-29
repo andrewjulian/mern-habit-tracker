@@ -31,10 +31,7 @@ module.exports = function (passport) {
       if (!user) {
         return cb(null, false);
       }
-      const userInformation = {
-        username: user.username,
-      };
-      return cb(null, userInformation);
+      return cb(null, user);
     } catch (err) {
       return cb(err);
     }
