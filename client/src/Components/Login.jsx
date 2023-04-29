@@ -4,8 +4,6 @@ import { Link } from "react-router-dom";
 import logo from "../assets/refresco.png";
 
 const Login = ({ setUser }) => {
-  //const { user, setUser } = useContext(UserContext);
-
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -21,7 +19,7 @@ const Login = ({ setUser }) => {
       });
       const data = await response.json();
       if (data.success) {
-        sessionStorage.setItem("user", JSON.stringify(data.user)); // Save the user information to session storage
+        sessionStorage.setItem("user", JSON.stringify(data.user));
         console.log("Logged in successfully");
         setUser(data.user);
       } else {
@@ -31,33 +29,6 @@ const Login = ({ setUser }) => {
       console.error(error);
     }
   };
-
-  /* const createLogin = async () => {
-    try {
-      const response = await fetch("http://localhost:3000/api/user/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, password }),
-      });
-      const data = await response.json();
-      if (data && data.success) {
-        setUser(data.user);
-        handleLogin(data.user._id);
-      } else {
-        console.log(data);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("username", username, "password", password);
-    createLogin();
-  }; */
 
   return (
     <div className="flex min-h-full items-center justify-center px-4 py-4 sm:px-6 lg:px-8">

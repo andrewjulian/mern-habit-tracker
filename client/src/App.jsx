@@ -18,25 +18,6 @@ function App() {
     }
   }, []);
 
-  /*  const handleLogin = (userId) => {
-    // Store the user's ID in sessionStorage
-    sessionStorage.setItem("userId", userId);
-
-    // Retrieve the user object from the server using their ID
-    fetch(`/api/users/${userId}`)
-      .then((response) => response.json())
-      .then((data) => setUser(data))
-      .catch((error) => console.error(error));
-  }; */
-
-  /* const handleLogout = () => {
-    // Remove the user's ID from sessionStorage
-    sessionStorage.removeItem("userId");
-
-    // Clear the user object in state
-    setUser(null);
-  }; */
-
   if (!user)
     return (
       <div>
