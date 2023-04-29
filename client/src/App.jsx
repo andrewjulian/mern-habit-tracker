@@ -11,7 +11,18 @@ import Card from "./Components/Card";
 function App() {
   const [user, setUser] = useState(null);
 
+  console.log("refreshing");
   console.log("user", user);
+
+  useEffect(() => {
+    fetch("http://localhost:3000/api/user/user", {
+      method: "GET",
+      credentials: "include",
+    })
+      .then((response) => response.json())
+      .then((data) => setUser(data))
+      .catch((error) => console.error(error));
+  }, []);
 
   if (!user)
     return (
@@ -19,7 +30,7 @@ function App() {
         <Routes>
           <Route path="/landing" element={<Landing />} />
           <Route path="/login" element={<Login setUser={setUser} />} />
-          <Route path="/signup" element={<Signup />} />
+          <Route path="/signup" element={<Signup setUser={setUser} />} />
           <Route path="/card" element={<Card />} />
           <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
