@@ -9,8 +9,8 @@ const login = async (req, res, next) => {
     else {
       req.logIn(user, (err) => {
         if (err) throw err;
-        res.json("Successfully Authenticated");
-        console.log(req.user);
+        res.json(req.user);
+        console.log("Logged in");
       });
     }
   })(req, res, next);
@@ -36,7 +36,7 @@ const register = async (req, res) => {
   }
 };
 
-const user = async (req, res) => {
+const user = (req, res) => {
   res.json(req.user);
 };
 
@@ -45,7 +45,8 @@ const allusers = async (req, res) => {
     const users = await User.find();
     res.json(users);
   } catch (err) {
-    throw err;
+    console.log(err);
+    res.status(500).json({ error: "Failed to fetch users" });
   }
 };
 

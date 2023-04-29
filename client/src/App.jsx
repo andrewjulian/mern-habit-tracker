@@ -1,6 +1,6 @@
 import { useEffect, useContext, useNavigate, useState } from "react";
 import "./App.css";
-import { UserContext } from "./Context/userContext";
+//import { UserContext } from "./Context/userContext";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./Components/Login";
 import Signup from "./Components/SignUp";
@@ -9,8 +9,9 @@ import Landing from "./Components/Landing";
 import Card from "./Components/Card";
 
 function App() {
-  //const [user, setUser] = useContext(UserContext);
   const [user, setUser] = useState(null);
+
+  console.log("user", user);
 
   if (!user)
     return (

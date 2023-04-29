@@ -36,13 +36,13 @@ app.use(cors({ origin: "http://127.0.0.1:5173", credentials: true }));
 
 app.use(
   session({
-    secret: uri,
+    secret: "secretcode",
     resave: true,
     saveUninitialized: true,
   })
 );
 
-app.use(cookieParser(uri));
+app.use(cookieParser("secretcode"));
 app.use(passport.initialize());
 app.use(passport.session());
 require("./PassportConfig")(passport);

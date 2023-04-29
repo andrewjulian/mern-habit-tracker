@@ -6,15 +6,16 @@ module.exports = function (passport) {
   passport.use(
     new localStrategy(async (username, password, done) => {
       try {
-        const user = await User.findOne({ username });
+        const user = await User.findOne({ username: username });
         if (!user) {
           return done(null, false);
         }
         const result = await bcrypt.compare(password, user.password);
-        if (result) {
+        if (result === true) {
           return done(null, user);
+        } else {
+          return done(null, false);
         }
-        return done(null, false);
       } catch (err) {
         return done(err);
       }
@@ -28,9 +29,6 @@ module.exports = function (passport) {
   passport.deserializeUser(async (id, cb) => {
     try {
       const user = await User.findOne({ _id: id });
-      if (!user) {
-        return cb(null, false);
-      }
       return cb(null, user);
     } catch (err) {
       return cb(err);
