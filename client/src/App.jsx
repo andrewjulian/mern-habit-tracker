@@ -1,4 +1,4 @@
-import { useEffect, useContext, useNavigate } from "react";
+import { useEffect, useContext, useNavigate, useState } from "react";
 import "./App.css";
 import { UserContext } from "./Context/userContext";
 import { Routes, Route, Navigate } from "react-router-dom";
@@ -9,14 +9,15 @@ import Landing from "./Components/Landing";
 import Card from "./Components/Card";
 
 function App() {
-  const [user, setUser] = useContext(UserContext);
+  //const [user, setUser] = useContext(UserContext);
+  const [user, setUser] = useState(null);
 
   if (!user)
     return (
       <div>
         <Routes>
           <Route path="/landing" element={<Landing />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Login setUser={setUser} />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/card" element={<Card />} />
           <Route path="*" element={<Navigate to="/login" />} />
@@ -26,7 +27,7 @@ function App() {
 
   return (
     <div>
-      <Navbar logout={logout} />
+      <Navbar />
       <Routes>
         <Route path="*" element={<Landing />} />
       </Routes>

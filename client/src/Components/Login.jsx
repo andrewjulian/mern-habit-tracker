@@ -3,8 +3,8 @@ import { UserContext } from "../Context/userContext";
 import { Link } from "react-router-dom";
 import logo from "../assets/refresco.png";
 
-const Login = () => {
-  const { user, setUser } = useContext(UserContext);
+const Login = ({ setUser }) => {
+  //const { user, setUser } = useContext(UserContext);
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
