@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { login, register, user, allusers } = require("./User");
+const { login, register, verify, allusers } = require("./User");
 
 router.route("/login").post(login);
 module.exports = router;
@@ -8,7 +8,7 @@ module.exports = router;
 router.route("/register").post(register);
 module.exports = router;
 
-router.route("/user").get(user);
+router.route("/verify").get(verify);
 module.exports = router;
 
 router.route("/allusers").get(allusers);

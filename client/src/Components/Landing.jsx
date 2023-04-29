@@ -1,9 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 
-const Landing = () => {
+const Landing = ({ user }) => {
+  console.log("landing user", user);
+
   return (
     <div>
-      <h1>Hi!</h1>
+      <h1>Hi</h1>
     </div>
   );
 };

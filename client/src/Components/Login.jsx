@@ -9,24 +9,55 @@ const Login = ({ setUser }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    console.log("running");
     try {
-      const res = await fetch("http://localhost:3000/api/user/login", {
+      const response = await fetch("http://localhost:3000/api/user/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ username, password }),
       });
-      const data = await res.json();
-      console.log(data);
-      setUser(data);
-    } catch (err) {
-      console.log(err);
+      const data = await response.json();
+      if (data.success) {
+        sessionStorage.setItem("user", JSON.stringify(data.user)); // Save the user information to session storage
+        console.log("Logged in successfully");
+        setUser(data.user);
+      } else {
+        console.log(data.message);
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
+
+  /* const createLogin = async () => {
+    try {
+      const response = await fetch("http://localhost:3000/api/user/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+      });
+      const data = await response.json();
+      if (data && data.success) {
+        setUser(data.user);
+        handleLogin(data.user._id);
+      } else {
+        console.log(data);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("username", username, "password", password);
+    createLogin();
+  }; */
 
   return (
     <div className="flex min-h-full items-center justify-center px-4 py-4 sm:px-6 lg:px-8">
@@ -39,7 +70,7 @@ const Login = ({ setUser }) => {
         <h2 className="text-center text-3xl font-bold tracking-tight text-gray-900">
           Sign in to your account!
         </h2>
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+        <form className="mt-8 space-y-6" onSubmit={handleLogin}>
           <div>
             <label className="sr-only" htmlFor="username">
               Username

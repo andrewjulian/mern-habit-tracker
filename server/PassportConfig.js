@@ -6,32 +6,29 @@ module.exports = function (passport) {
   passport.use(
     new localStrategy(async (username, password, done) => {
       try {
-        const user = await User.findOne({ username: username });
+        const user = await User.findOne({ username });
         if (!user) {
-          return done(null, false);
+          return done(null, false, { message: "Invalid username or password" });
         }
-        const result = await bcrypt.compare(password, user.password);
-        if (result === true) {
-          return done(null, user);
-        } else {
-          return done(null, false);
+        const passwordMatch = await bcrypt.compare(password, user.password);
+        if (!passwordMatch) {
+          return done(null, false, { message: "Invalid username or password" });
         }
+        return done(null, user);
       } catch (err) {
         return done(err);
       }
     })
   );
 
-  passport.serializeUser((user, cb) => {
-    cb(null, user.id);
+  passport.serializeUser((user, done) => {
+    done(null, user._id);
   });
 
-  passport.deserializeUser(async (id, cb) => {
-    try {
-      const user = await User.findOne({ _id: id });
-      return cb(null, user);
-    } catch (err) {
-      return cb(err);
-    }
+  passport.deserializeUser((id, done) => {
+    User.findById(id, (err, user) => {
+      if (err) return done(err);
+      done(null, user);
+    });
   });
 };

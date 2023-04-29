@@ -11,18 +11,31 @@ import Card from "./Components/Card";
 function App() {
   const [user, setUser] = useState(null);
 
-  console.log("refreshing");
-  console.log("user", user);
-
   useEffect(() => {
-    fetch("http://localhost:3000/api/user/user", {
-      method: "GET",
-      credentials: "include",
-    })
+    const userFromSessionStorage = sessionStorage.getItem("user");
+    if (userFromSessionStorage) {
+      setUser(JSON.parse(userFromSessionStorage));
+    }
+  }, []);
+
+  /*  const handleLogin = (userId) => {
+    // Store the user's ID in sessionStorage
+    sessionStorage.setItem("userId", userId);
+
+    // Retrieve the user object from the server using their ID
+    fetch(`/api/users/${userId}`)
       .then((response) => response.json())
       .then((data) => setUser(data))
       .catch((error) => console.error(error));
-  }, []);
+  }; */
+
+  /* const handleLogout = () => {
+    // Remove the user's ID from sessionStorage
+    sessionStorage.removeItem("userId");
+
+    // Clear the user object in state
+    setUser(null);
+  }; */
 
   if (!user)
     return (
@@ -41,7 +54,7 @@ function App() {
     <div>
       <Navbar />
       <Routes>
-        <Route path="*" element={<Landing />} />
+        <Route path="*" element={<Landing user={user} />} />
       </Routes>
     </div>
   );

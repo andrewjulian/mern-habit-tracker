@@ -5,14 +5,21 @@ const passport = require("passport");
 const login = async (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
     if (err) throw err;
-    if (!user) res.json("No User Exists");
-    else {
-      req.logIn(user, (err) => {
-        if (err) throw err;
-        res.json(req.user);
-        console.log("Logged in");
+    if (!user) {
+      return res.json({
+        success: false,
+        message: "Invalid username or password",
       });
     }
+    req.logIn(user, (err) => {
+      if (err) throw err;
+      req.session.user = user;
+      return res.json({
+        success: true,
+        message: "Logged in successfully",
+        user: req.user,
+      });
+    });
   })(req, res, next);
 };
 
@@ -36,8 +43,12 @@ const register = async (req, res) => {
   }
 };
 
-const user = (req, res) => {
-  res.json(req.user);
+const verify = (req, res) => {
+  if (req.isAuthenticated()) {
+    res.json(req.user);
+  } else {
+    res.json({ message: "Not authenticated" });
+  }
 };
 
 const allusers = async (req, res) => {
@@ -50,4 +61,4 @@ const allusers = async (req, res) => {
   }
 };
 
-module.exports = { login, register, user, allusers };
+module.exports = { login, register, verify, allusers };

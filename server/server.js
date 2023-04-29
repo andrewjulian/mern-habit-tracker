@@ -5,7 +5,6 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-const bcrypt = require("bcryptjs");
 const passport = require("passport");
 const passportlocal = require("passport-local").Strategy;
 const session = require("express-session");
@@ -37,8 +36,8 @@ app.use(cors({ origin: "http://127.0.0.1:5173", credentials: true }));
 app.use(
   session({
     secret: "secretcode",
-    resave: true,
-    saveUninitialized: true,
+    resave: false,
+    saveUninitialized: false,
   })
 );
 
