@@ -49,7 +49,7 @@ function App() {
     <div>
       <Navbar user={user} userLogout={userLogout} />
       <Routes>
-        <Route path="*" element={<Landing user={user} />} />
+        <Route path="*" element={<Landing />} />
       </Routes>
     </div>
   );

@@ -1,8 +1,6 @@
 import React from "react";
 
-const Landing = ({ user }) => {
-  console.log("landing user", user);
-
+const Landing = () => {
   return (
     <div>
       <h1>Hi</h1>
