@@ -61,4 +61,9 @@ const allusers = async (req, res) => {
   }
 };
 
-module.exports = { login, register, verify, allusers };
+const logout = (req, res) => {
+  req.logout();
+  res.json({ message: "Logged out" });
+};
+
+module.exports = { login, register, verify, allusers, logout };

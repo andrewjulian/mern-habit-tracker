@@ -18,6 +18,20 @@ function App() {
     }
   }, []);
 
+  const userLogout = () => {
+    sessionStorage.removeItem("user");
+    setUser(null);
+    const logout = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/api/user/logout");
+        const data = await response.json();
+        console.log(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+  };
+
   if (!user)
     return (
       <div>
@@ -33,7 +47,7 @@ function App() {
 
   return (
     <div>
-      <Navbar />
+      <Navbar user={user} userLogout={userLogout} />
       <Routes>
         <Route path="*" element={<Landing user={user} />} />
       </Routes>
