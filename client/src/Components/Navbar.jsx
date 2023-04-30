@@ -1,12 +1,25 @@
 import React from "react";
+import logo from "../assets/refresco.png";
 
 const Navbar = ({ user, userLogout }) => {
   return (
-    <div className="flex justify-between">
-      <h1>Hello, {user.username}! </h1>
-      <button onClick={userLogout} className="bg-blue-500 text-white">
-        Logout
-      </button>
+    <div>
+      <div className="flex justify-between">
+        <div className="flex justify-center text-center align-center">
+          <img src={logo} alt="logo" className="w-[100px] h-auto" />
+          <h4 className="my-auto text-[25px] font-mono">
+            A Thoughtful Planning App
+          </h4>
+        </div>
+        <div className="my-auto mx-10">
+          <button
+            onClick={userLogout}
+            className="bg-[#7e6e45] text-white px-5 py-2 rounded-xl font-mono"
+          >
+            Logout
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
