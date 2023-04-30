@@ -28,6 +28,8 @@ const SignUp = ({ setUser }) => {
       if (data.errors) {
         setErrors(data.errors);
       } else {
+        console.log("user", data);
+        sessionStorage.setItem("user", JSON.stringify(data));
         setUser(data);
       }
     } catch (err) {
