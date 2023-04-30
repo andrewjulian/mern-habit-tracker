@@ -7,9 +7,7 @@ const Navbar = ({ user, userLogout }) => {
       <div className="flex justify-between">
         <div className="flex justify-center text-center align-center">
           <img src={logo} alt="logo" className="w-[100px] h-auto" />
-          <h4 className="my-auto text-[25px] font-mono">
-            A Thoughtful Planning App
-          </h4>
+          <h4 className="my-auto text-[25px] font-mono">Thoughtful Planning</h4>
         </div>
         <div className="my-auto mx-10">
           <button
