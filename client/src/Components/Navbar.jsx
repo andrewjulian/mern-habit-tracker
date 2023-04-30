@@ -14,7 +14,7 @@ const Navbar = ({ user, userLogout }) => {
         <div className="my-auto mx-10">
           <button
             onClick={userLogout}
-            className="bg-[#7e6e45] text-white px-5 py-2 rounded-xl font-mono"
+            className="bg-[#7e6e45] text-black px-5 py-2 rounded-xl font-mono  hover:text-white"
           >
             Logout
           </button>
