@@ -5,7 +5,7 @@ const ObjectId = mongoose.Types.ObjectId;
 const cards = async (req, res) => {
   try {
     const cards = await Card.find().lean();
-    res.status(200).json({ success: true, cards });
+    res.json(cards);
   } catch (error) {
     res.status(400).json({
       message: "An error occurred",
@@ -14,4 +14,16 @@ const cards = async (req, res) => {
   }
 };
 
-module.exports = { cards };
+const deleteCard = async (req, res) => {
+  try {
+    const card = await Card.findByAndDelete({ _id: req.params.id });
+    res.json({ success: true, card });
+  } catch (error) {
+    res.status(400).json({
+      message: "An error occurred",
+      error: error.message,
+    });
+  }
+};
+
+module.exports = { cards, deleteCard };
