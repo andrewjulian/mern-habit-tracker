@@ -26,4 +26,16 @@ const deleteCard = async (req, res) => {
   }
 };
 
-module.exports = { cards, deleteCard };
+const addCard = async (req, res) => {
+  try {
+    const card = await Card.create(req.body);
+    res.json({ success: true, card });
+  } catch (error) {
+    res.status(400).json({
+      message: "An error occurred",
+      error: error.message,
+    });
+  }
+};
+
+module.exports = { cards, deleteCard, addCard };

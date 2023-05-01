@@ -1,11 +1,12 @@
-import React, { useState, useContext } from "react";
-import { UserContext } from "../Context/userContext";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/refresco.png";
 
 const Login = ({ setUser }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -22,6 +23,7 @@ const Login = ({ setUser }) => {
         sessionStorage.setItem("user", JSON.stringify(data.user));
         console.log("Logged in successfully");
         setUser(data.user);
+        navigate("/landing");
       } else {
         console.log(data.message);
       }

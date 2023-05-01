@@ -1,4 +1,5 @@
 import React from "react";
+import CardDisplay from "./CardDisplay";
 
 const Landing = () => {
   return (
@@ -9,6 +10,7 @@ const Landing = () => {
       <h1 className="text-center font-mono my-[4px] text-xl font-bold tracking-tight text-gray-900">
         Your Thoughtful Planning Tool
       </h1>
+      <CardDisplay />
     </div>
   );
 };

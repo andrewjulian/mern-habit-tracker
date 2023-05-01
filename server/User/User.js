@@ -62,8 +62,12 @@ const allusers = async (req, res) => {
 };
 
 const logout = (req, res) => {
-  req.logout();
-  res.json({ message: "Logged out" });
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.json({ message: "Logged out" });
+  });
 };
 
 const deleteUser = async (req, res) => {

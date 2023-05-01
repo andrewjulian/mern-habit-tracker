@@ -21,7 +21,7 @@ module.exports = router;
 router.route("/allusers").get(allusers);
 module.exports = router;
 
-router.route("/logout").get(logout);
+router.route("/logout").post(logout);
 module.exports = router;
 
 router.route("/delete/:id").delete(deleteUser);

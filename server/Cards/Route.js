@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { cards, deleteCard } = require("./Card");
+const { cards, deleteCard, addCard } = require("./Card");
 
 router.route("/cards").get(cards);
 module.exports = router;
@@ -9,10 +9,10 @@ module.exports = router;
 router.route("/delete/:id").delete(deleteCard);
 module.exports = router;
 
-/* router.route("/add").post(addCard);
+router.route("/add").post(addCard);
 module.exports = router;
 
-router.route("/update/:id").put(updateCard);
+/* router.route("/update/:id").put(updateCard);
 module.exports = router;
 
 router.route("/search/:id").get(searchCard);
