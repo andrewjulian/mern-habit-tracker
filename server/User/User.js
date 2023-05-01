@@ -66,4 +66,14 @@ const logout = (req, res) => {
   res.json({ message: "Logged out" });
 };
 
-module.exports = { login, register, verify, allusers, logout };
+const deleteUser = async (req, res) => {
+  try {
+    const deletedUser = await User.findByIdAndDelete(req.params.id);
+    res.json({ message: ` ${deletedUser.username} deleted` });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Failed to delete user" });
+  }
+};
+
+module.exports = { login, register, verify, allusers, logout, deleteUser };

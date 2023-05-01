@@ -1,6 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const { login, register, verify, allusers, logout } = require("./User");
+const {
+  login,
+  register,
+  verify,
+  allusers,
+  logout,
+  deleteUser,
+} = require("./User");
 
 router.route("/login").post(login);
 module.exports = router;
@@ -15,4 +22,7 @@ router.route("/allusers").get(allusers);
 module.exports = router;
 
 router.route("/logout").get(logout);
+module.exports = router;
+
+router.route("/delete/:id").delete(deleteUser);
 module.exports = router;
