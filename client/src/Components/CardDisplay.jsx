@@ -1,9 +1,12 @@
 import React from "react";
+import Card from "./Card";
 
-const CardDisplay = () => {
+const CardDisplay = ({ user }) => {
   return (
-    <div>
-      <h1> Card Display </h1>
+    <div className="text-center align-middle mt-10">
+      <button className="bg-[#7e6e45] rounded-xl text-white px-3 py-1">
+        <p>Add Card</p>
+      </button>
     </div>
   );
 };

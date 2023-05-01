@@ -5,24 +5,6 @@ import CardTasks from "./CardTasks";
 const Card = () => {
   const [startDate, setStartDate] = useState(new Date());
 
-  const tasks = [
-    {
-      id: 1,
-      task: "The Highlight will go here",
-      status: 0,
-    },
-    {
-      id: 2,
-      task: "The Highlight will go here",
-      status: 0,
-    },
-    {
-      id: 3,
-      task: "The Highlight will go here",
-      status: 0,
-    },
-  ];
-
   const displayTasks = tasks.map((task, index) => {
     return <CardTasks key={index} task={task} />;
   });
@@ -46,6 +28,9 @@ const Card = () => {
                   {displayTasks}
                 </div>
               </div>
+              <button>
+                <p>Add Task</p>
+              </button>
             </div>
           </div>
         </div>
