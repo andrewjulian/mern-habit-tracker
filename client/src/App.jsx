@@ -14,6 +14,8 @@ function App() {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
+  console.log(user);
+
   useEffect(() => {
     const userFromSessionStorage = sessionStorage.getItem("user");
     if (userFromSessionStorage) {

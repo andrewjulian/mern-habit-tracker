@@ -2,7 +2,7 @@ const User = require("../model/UserModel");
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
 
-const login = async (req, res, next) => {
+/* const login = async (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
     if (err) throw err;
     if (!user) {
@@ -18,7 +18,37 @@ const login = async (req, res, next) => {
         success: true,
         message: "Logged in successfully",
         user: req.user,
+        cards: req.user.populate("cards"),
       });
+    });
+  })(req, res, next);
+}; */
+
+const login = async (req, res, next) => {
+  passport.authenticate("local", async (err, user, info) => {
+    if (err) return next(err);
+    if (!user) {
+      return res.json({
+        success: false,
+        message: "Invalid username or password",
+      });
+    }
+    req.logIn(user, async (err) => {
+      if (err) return next(err);
+      try {
+        const populatedUser = await User.findById(user._id).populate({
+          path: "cards",
+          options: { strictPopulate: false },
+        });
+        req.session.user = populatedUser;
+        return res.json({
+          success: true,
+          message: "Logged in successfully",
+          user: populatedUser,
+        });
+      } catch (error) {
+        return next(error);
+      }
     });
   })(req, res, next);
 };

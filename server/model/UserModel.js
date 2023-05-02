@@ -10,7 +10,7 @@ const userSchema = new Schema(
   { timestamps: true }
 );
 
-userSchema.virtual("userCards", {
+userSchema.virtual("cards", {
   ref: "Card",
   localField: "_id",
   foreignField: "user",
