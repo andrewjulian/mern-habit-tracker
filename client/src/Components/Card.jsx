@@ -5,9 +5,9 @@ import CardTasks from "./CardTasks";
 const Card = () => {
   const [startDate, setStartDate] = useState(new Date());
 
-  const displayTasks = tasks.map((task, index) => {
+  /* const displayTasks = tasks.map((task, index) => {
     return <CardTasks key={index} task={task} />;
-  });
+  }); */
 
   return (
     <div className="flex items-center h-screen">
@@ -23,11 +23,11 @@ const Card = () => {
                   onChange={(date) => setStartDate(date)}
                 />
               </div>
-              <div className=" items-center">
+              {/* <div className=" items-center">
                 <div className="flex flex-col align-middle justify-between">
                   {displayTasks}
                 </div>
-              </div>
+              </div> */}
               <button>
                 <p>Add Task</p>
               </button>

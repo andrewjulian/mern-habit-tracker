@@ -57,7 +57,7 @@ function App() {
     <div>
       <Navbar user={user} userLogout={userLogout} />
       <Routes>
-        <Route path="/landing" element={<Landing />} />
+        <Route path="/landing" element={<Landing user={user} />} />
         <Route path="*" element={<Navigate to="/landing" />} />
       </Routes>
     </div>
