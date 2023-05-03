@@ -4,7 +4,7 @@ import Card from "./Card";
 const CardDisplay = ({ user }) => {
   const [cards, setCards] = useState([]);
 
-  console.log(user._id);
+  console.log(user);
 
   /* useEffect(() => {
     const fetchCards = async () => {

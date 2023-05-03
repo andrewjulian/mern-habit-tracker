@@ -2,7 +2,7 @@ const User = require("../model/UserModel");
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
 
-/* const login = async (req, res, next) => {
+const login = async (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
     if (err) throw err;
     if (!user) {
@@ -18,13 +18,12 @@ const passport = require("passport");
         success: true,
         message: "Logged in successfully",
         user: req.user,
-        cards: req.user.populate("cards"),
       });
     });
   })(req, res, next);
-}; */
+};
 
-const login = async (req, res, next) => {
+/* const login = async (req, res, next) => {
   passport.authenticate("local", async (err, user, info) => {
     if (err) return next(err);
     if (!user) {
@@ -36,18 +35,15 @@ const login = async (req, res, next) => {
     req.logIn(user, async (err) => {
       if (err) return next(err);
       try {
-        const populatedUser = await User.findById(user._id).populate({
-          path: "cards",
-          options: { strictPopulate: false },
-        });
-        req.session.user = populatedUser;
-        return res.json(populatedUser);
+        const user = await User.findById(user._id);
+        req.session.user = user;
+        return res.json(user);
       } catch (error) {
         return next(error);
       }
     });
   })(req, res, next);
-};
+}; */
 
 const register = async (req, res) => {
   try {
@@ -106,16 +102,6 @@ const deleteUser = async (req, res) => {
   }
 };
 
-const userCards = async (req, res) => {
-  try {
-    const user = await User.findById(req.params.id).populate("cards");
-    res.json(user.cards);
-  } catch (err) {
-    console.log(err);
-    res.status(500).json({ error: "Failed to fetch user cards" });
-  }
-};
-
 module.exports = {
   login,
   register,
@@ -123,5 +109,4 @@ module.exports = {
   allusers,
   logout,
   deleteUser,
-  userCards,
 };

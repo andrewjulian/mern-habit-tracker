@@ -9,7 +9,7 @@ module.exports = router;
 router.route("/delete/:id").delete(deleteCard);
 module.exports = router;
 
-router.route("/add").post(addCard);
+router.route("/addCard").post(addCard);
 module.exports = router;
 
 /* router.route("/update/:id").put(updateCard);
