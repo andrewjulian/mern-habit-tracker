@@ -5,18 +5,10 @@ const cardSchema = new Schema(
   {
     user: { type: Schema.Types.ObjectId, ref: "User", required: true },
     date: { type: Date, required: true },
+    cardTasks: [{ type: Schema.Types.ObjectId, ref: "Task" }],
   },
   { timestamps: true }
 );
-
-cardSchema.virtual("cardTasks", {
-  ref: "Task",
-  localField: "_id",
-  foreignField: "card",
-});
-
-cardSchema.set("toJSON", { virtuals: true });
-cardSchema.set("toObject", { virtuals: true });
 
 const Card = mongoose.model("Card", cardSchema);
 module.exports = Card;
