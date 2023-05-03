@@ -7,14 +7,10 @@ import Login from "./Components/Login";
 import Signup from "./Components/SignUp";
 import Navbar from "./Components/Navbar";
 import Landing from "./Components/Landing";
-import Card from "./Components/Card";
-import CardDisplay from "./Components/CardDisplay";
 
 function App() {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
-
-  console.log(user);
 
   useEffect(() => {
     const userFromSessionStorage = sessionStorage.getItem("user");

@@ -2,7 +2,6 @@ import React from "react";
 import CardDisplay from "./CardDisplay";
 
 const Landing = ({ user }) => {
-  console.log(user);
   return (
     <div className="m-[15px]">
       <h1 className="text-center font-mono text-3xl font-bold  text-gray-900">
