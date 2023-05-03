@@ -15,7 +15,8 @@ function App() {
   useEffect(() => {
     const userFromSessionStorage = sessionStorage.getItem("user");
     if (userFromSessionStorage) {
-      setUser(JSON.parse(userFromSessionStorage));
+      console.log(userFromSessionStorage.user);
+      setUser(userFromSessionStorage);
     }
   }, []);
 

@@ -41,11 +41,7 @@ const login = async (req, res, next) => {
           options: { strictPopulate: false },
         });
         req.session.user = populatedUser;
-        return res.json({
-          success: true,
-          message: "Logged in successfully",
-          user: populatedUser,
-        });
+        return res.json(populatedUser);
       } catch (error) {
         return next(error);
       }
@@ -110,4 +106,22 @@ const deleteUser = async (req, res) => {
   }
 };
 
-module.exports = { login, register, verify, allusers, logout, deleteUser };
+const userCards = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id).populate("cards");
+    res.json(user.cards);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Failed to fetch user cards" });
+  }
+};
+
+module.exports = {
+  login,
+  register,
+  verify,
+  allusers,
+  logout,
+  deleteUser,
+  userCards,
+};

@@ -1,21 +1,30 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Card from "./Card";
 
 const CardDisplay = ({ user }) => {
-  const cards = user.cards;
-  console.log(cards);
+  const [cards, setCards] = useState([]);
 
-  const displayCards = cards.map((card) => {
-    return (
-      <div>
-        <h1> {card.date}</h1>
-      </div>
-    );
-  });
+  console.log(user._id);
+
+  /* useEffect(() => {
+    const fetchCards = async () => {
+      try {
+        const response = await fetch(`/user/${user._id}/cards`);
+        const userCards = await response.json();
+        setCards(userCards);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchCards();
+  }, [user]);
+
+  const displayCards = cards.map((card, index) => {
+    return <Card key={index} card={card} />;
+  }); */
 
   return (
     <div className="text-center align-middle mt-10">
-      {displayCards}
       <button className="bg-[#7e6e45] rounded-xl text-white px-3 py-1">
         <p>Add Card</p>
       </button>
