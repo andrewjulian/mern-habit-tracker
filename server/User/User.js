@@ -102,6 +102,18 @@ const deleteUser = async (req, res) => {
   }
 };
 
+const getCards = async (req, res) => {
+  try {
+    const user = await User.findBy({ username: req.params.username }).populate(
+      "userCards"
+    );
+    res.json(user.userCards);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Failed to fetch cards" });
+  }
+};
+
 module.exports = {
   login,
   register,
@@ -109,4 +121,5 @@ module.exports = {
   allusers,
   logout,
   deleteUser,
+  getCards,
 };

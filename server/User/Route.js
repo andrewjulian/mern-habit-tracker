@@ -7,6 +7,7 @@ const {
   allusers,
   logout,
   deleteUser,
+  getCards,
 } = require("./User");
 
 router.route("/login").post(login);
@@ -25,4 +26,7 @@ router.route("/logout").post(logout);
 module.exports = router;
 
 router.route("/delete/:id").delete(deleteUser);
+module.exports = router;
+
+router.route("/:username/cards").get(getCards);
 module.exports = router;

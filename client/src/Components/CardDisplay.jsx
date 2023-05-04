@@ -2,26 +2,23 @@ import React, { useState, useEffect } from "react";
 import Card from "./Card";
 
 const CardDisplay = ({ user }) => {
-  const [cards, setCards] = useState([]);
-
   console.log(user);
 
-  /* useEffect(() => {
-    const fetchCards = async () => {
+  /*  useEffect(() => {
+    const getCards = async () => {
       try {
-        const response = await fetch(`/user/${user._id}/cards`);
-        const userCards = await response.json();
-        setCards(userCards);
+        const response = await fetch(
+          `http://localhost:3000/api/user/${user.username}/cards`
+        );
+        const data = await response.json();
+        console.log(data);
+        setCards(data);
       } catch (error) {
         console.error(error);
       }
     };
-    fetchCards();
-  }, [user]);
-
-  const displayCards = cards.map((card, index) => {
-    return <Card key={index} card={card} />;
-  }); */
+    getCards();
+  }, []); */
 
   return (
     <div className="text-center align-middle mt-10">

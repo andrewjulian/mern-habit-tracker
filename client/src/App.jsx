@@ -13,9 +13,8 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const userFromSessionStorage = sessionStorage.getItem("user");
+    const userFromSessionStorage = JSON.parse(sessionStorage.getItem("user"));
     if (userFromSessionStorage) {
-      console.log(userFromSessionStorage.user);
       setUser(userFromSessionStorage);
     }
   }, []);
