@@ -17,7 +17,7 @@ const cards = async (req, res) => {
 
 const deleteCard = async (req, res) => {
   try {
-    const card = await Card.findByAndDelete({ _id: req.params.id });
+    const card = await Card.findByIdAndDelete({ _id: req.params.id });
     res.json({ success: true, card });
   } catch (error) {
     res.status(400).json({
@@ -33,7 +33,7 @@ const addCard = async (req, res) => {
     const user = await User.findById(req.body.user);
     user.userCards.push(card._id);
     await user.save();
-    res.json({ success: true, card, user });
+    res.json({ success: true, user });
   } catch (error) {
     res.status(400).json({
       message: "An error occurred",

@@ -3,8 +3,7 @@ import DatePicker from "react-datepicker";
 import CardTasks from "./CardTasks";
 
 const Card = ({ card }) => {
-  const [startDate, setStartDate] = useState(new Date());
-
+  console.log(card);
   /* const displayTasks = tasks.map((task, index) => {
     return <CardTasks key={index} task={task} />;
   }); */

@@ -2,49 +2,6 @@ const User = require("../model/UserModel");
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
 
-const login = async (req, res, next) => {
-  passport.authenticate("local", (err, user, info) => {
-    if (err) throw err;
-    if (!user) {
-      return res.json({
-        success: false,
-        message: "Invalid username or password",
-      });
-    }
-    req.logIn(user, (err) => {
-      if (err) throw err;
-      req.session.user = user;
-      return res.json({
-        success: true,
-        message: "Logged in successfully",
-        user: req.user,
-      });
-    });
-  })(req, res, next);
-};
-
-/* const login = async (req, res, next) => {
-  passport.authenticate("local", async (err, user, info) => {
-    if (err) return next(err);
-    if (!user) {
-      return res.json({
-        success: false,
-        message: "Invalid username or password",
-      });
-    }
-    req.logIn(user, async (err) => {
-      if (err) return next(err);
-      try {
-        const user = await User.findById(user._id);
-        req.session.user = user;
-        return res.json(user);
-      } catch (error) {
-        return next(error);
-      }
-    });
-  })(req, res, next);
-}; */
-
 const register = async (req, res) => {
   try {
     const doc = await User.findOne({ username: req.body.username });
@@ -63,6 +20,31 @@ const register = async (req, res) => {
   } catch (err) {
     throw err;
   }
+};
+
+const login = async (req, res, next) => {
+  passport.authenticate("local", async (err, user, info) => {
+    if (err) throw err;
+    if (!user) {
+      return res.json({
+        success: false,
+        message: "Invalid username or password",
+      });
+    }
+    await req.logIn(user, async (err) => {
+      if (err) throw err;
+      const userWithCards = await User.findOne({ _id: user._id }).populate(
+        "userCards"
+      );
+      req.session.user = userWithCards;
+      return res.json({
+        success: true,
+        message: "Logged in successfully",
+        user: userWithCards,
+        cards: userWithCards.userCards,
+      });
+    });
+  })(req, res, next);
 };
 
 const verify = (req, res) => {
@@ -104,10 +86,9 @@ const deleteUser = async (req, res) => {
 
 const getCards = async (req, res) => {
   try {
-    const user = await User.findBy({ username: req.params.username }).populate(
-      "userCards"
-    );
-    res.json(user.userCards);
+    console.log("user id", req.params.id);
+    const user = await User.findById(req.params.id).populate("userCards");
+    res.json(user);
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: "Failed to fetch cards" });

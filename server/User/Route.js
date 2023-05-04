@@ -28,5 +28,5 @@ module.exports = router;
 router.route("/delete/:id").delete(deleteUser);
 module.exports = router;
 
-router.route("/:username/cards").get(getCards);
+router.route("/:id/cards").get(getCards);
 module.exports = router;

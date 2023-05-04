@@ -25,10 +25,12 @@ module.exports = function (passport) {
     done(null, user._id);
   });
 
-  passport.deserializeUser((id, done) => {
-    User.findById(id, (err, user) => {
-      if (err) return done(err);
+  passport.deserializeUser(async (id, done) => {
+    try {
+      const user = await User.findById(id);
       done(null, user);
-    });
+    } catch (err) {
+      done(err);
+    }
   });
 };
