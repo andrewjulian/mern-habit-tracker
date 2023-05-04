@@ -33,7 +33,7 @@ const addCard = async (req, res) => {
     const user = await User.findById(req.body.user);
     user.userCards.push(card._id);
     await user.save();
-    res.json({ success: true, card });
+    res.json({ success: true, card, user });
   } catch (error) {
     res.status(400).json({
       message: "An error occurred",
