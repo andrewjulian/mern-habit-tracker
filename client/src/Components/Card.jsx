@@ -16,7 +16,7 @@ const Card = ({ card }) => {
             <div className="w-full px-4 py-4 bg-white">
               <div className="flex items-center justify-left mb-3">
                 <h3 className="text-gray-600 text-2xl mt-1 mr-5">
-                  Date: {card.date}
+                  Date: PlaceHolder
                 </h3>
               </div>
               {/* <div className=" items-center">

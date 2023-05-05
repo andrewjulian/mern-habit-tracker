@@ -33,9 +33,8 @@ const CardDisplay = ({ user }) => {
 
   return (
     <div className="text-center align-middle mt-10">
-      <div className="flex flex-row justify-center my-10">HI</div>
-
-      <button className="bg-[#7e6e45] rounded-xl text-white px-3 py-1">
+      <Card />
+      <button className="bg-[#7e6e45] rounded-xl text-white my-7 px-3 py-1">
         <p>Add Card</p>
       </button>
     </div>
