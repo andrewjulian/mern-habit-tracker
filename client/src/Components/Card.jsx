@@ -52,9 +52,9 @@ const Card = ({ card }) => {
               <button
                 type="button"
                 onClick={() => setShowModal(true)}
-                className="bg-[#7e6e45] rounded-xl text-white my-3 px-3 py-1"
+                className="bg-[#7e6e45] rounded-full text-xl text-white my-3 px-2 py-0 align-middle justify-center"
               >
-                Add Task
+                +
               </button>
               {showModal ? (
                 <>
