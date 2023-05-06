@@ -37,11 +37,11 @@ const Card = ({ card }) => {
           <div className="w-full h-56 bg-cover bg-center">
             <div className="w-full px-4 py-4 bg-white">
               <div className="flex items-center justify-between mb-3">
-                <h3 className="text-gray-600 font-mono text-xl mt-1 mx-3">
+                <h3 className="text-gray-600 font-mono text-xl mt-1 mx-2">
                   Today
                 </h3>
-                <h3 className="text-gray-600 italic font-mono text-xl mt-1 mx-4">
-                  Date
+                <h3 className="text-gray-600 italic font-mono text-xl mt-1 mx-2">
+                  Date: 01/01/2023
                 </h3>
               </div>
               <div className=" items-center">
