@@ -3,9 +3,9 @@ const Schema = mongoose.Schema;
 
 const cardSchema = new Schema(
   {
-    user: { type: Schema.Types.ObjectId, ref: "User", required: true },
     date: { type: Date, required: true },
     cardTasks: [{ type: Schema.Types.ObjectId, ref: "Task" }],
+    user: { type: Schema.Types.ObjectId, ref: "User", required: true },
   },
   { timestamps: true }
 );

@@ -1,6 +1,7 @@
 const User = require("../model/UserModel");
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
+const Card = require("../model/CardModel");
 
 const register = async (req, res) => {
   try {
@@ -33,15 +34,19 @@ const login = async (req, res, next) => {
     }
     await req.logIn(user, async (err) => {
       if (err) throw err;
-      const userWithCards = await User.findOne({ _id: user._id }).populate(
+      const userWithCards = await User.findById({ _id: user._id }).populate(
         "userCards"
       );
       req.session.user = userWithCards;
-      return res.json({
+      res.json({
         success: true,
         message: "Logged in successfully",
-        user: userWithCards,
-        cards: userWithCards.userCards,
+        user: {
+          _id: user._id,
+          username: user.username,
+          email: user.email,
+          userCards: user.userCards,
+        },
       });
     });
   })(req, res, next);

@@ -20,10 +20,10 @@ const Login = ({ setUser }) => {
       });
       const data = await response.json();
       if (data.success) {
-        console.log("user data", data.user);
+        console.log("user data", data);
         sessionStorage.setItem("user", JSON.stringify(data.user));
 
-        setUser(data.user);
+        setUser(data);
         navigate("/landing");
       } else {
         console.log(data.message);
