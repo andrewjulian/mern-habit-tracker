@@ -41,12 +41,7 @@ const login = async (req, res, next) => {
       res.json({
         success: true,
         message: "Logged in successfully",
-        user: {
-          _id: user._id,
-          username: user.username,
-          email: user.email,
-          userCards: user.userCards,
-        },
+        user: userWithCards,
       });
     });
   })(req, res, next);
@@ -89,6 +84,16 @@ const deleteUser = async (req, res) => {
   }
 };
 
+const getUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id).populate("userCards");
+    res.json(user);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Failed to fetch user" });
+  }
+};
+
 const getCards = async (req, res) => {
   try {
     console.log("user id", req.params.id);
@@ -107,5 +112,6 @@ module.exports = {
   allusers,
   logout,
   deleteUser,
+  getUser,
   getCards,
 };

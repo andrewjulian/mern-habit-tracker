@@ -8,6 +8,7 @@ const {
   logout,
   deleteUser,
   getCards,
+  getUser,
 } = require("./User");
 
 router.route("/login").post(login);
@@ -29,4 +30,7 @@ router.route("/delete/:id").delete(deleteUser);
 module.exports = router;
 
 router.route("/:id/cards").get(getCards);
+module.exports = router;
+
+router.route("/user/:id").get(getUser);
 module.exports = router;

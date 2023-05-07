@@ -12,12 +12,43 @@ function App() {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
+  if (user) {
+    console.log("user app", user);
+    console.log("userCards app", user.userCards);
+  }
+
   useEffect(() => {
-    const userFromSessionStorage = JSON.parse(sessionStorage.getItem("user"));
-    if (userFromSessionStorage) {
-      setUser(userFromSessionStorage);
+    const user = JSON.parse(sessionStorage.getItem("user"));
+    if (user) {
+      setUser(user);
     }
   }, []);
+
+  /* useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const user = JSON.parse(sessionStorage.getItem("user"));
+        console.log("session user", user);
+        const response = await fetch(
+          `http://localhost:3000/api/user/${user._id}/cards`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        const data = await response.json();
+        console.log("data", data);
+        if (data.success) {
+          setUser(data.user);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchUser();
+  }, []); */
 
   const userLogout = async () => {
     try {
