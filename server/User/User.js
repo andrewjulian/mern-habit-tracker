@@ -62,7 +62,7 @@ const verify = (req, res) => {
 
 const allusers = async (req, res) => {
   try {
-    const users = await User.find();
+    const users = await User.find().populate("userCards");
     res.json(users);
   } catch (err) {
     console.log(err);
