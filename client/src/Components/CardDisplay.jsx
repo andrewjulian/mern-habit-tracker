@@ -7,7 +7,7 @@ const CardDisplay = ({ user }) => {
 
   let displayCards = null;
 
-  if (user.userCards.length > 0) {
+  if (user.userCards.length != null && user.userCards.length > 0) {
     displayCards = user.userCards.map((card, index) => {
       return <Card key={index} card={card} />;
     });

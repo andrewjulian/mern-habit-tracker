@@ -20,7 +20,7 @@ const Login = ({ setUser }) => {
       });
       const data = await response.json();
       if (data.success) {
-        sessionStorage.setItem("user", JSON.stringify(data.user));
+        sessionStorage.setItem("user", data.user._id);
         setUser(data.user);
         navigate("/landing");
       } else {

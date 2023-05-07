@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./App.css";
 //import { UserContext } from "./Context/userContext";
@@ -7,77 +7,35 @@ import Login from "./Components/Login";
 import Signup from "./Components/SignUp";
 import Navbar from "./Components/Navbar";
 import Landing from "./Components/Landing";
+import { UserContext } from "./Context/userContext";
+const sessionUser = sessionStorage.getItem("user");
 
 function App() {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true); // add loading state
   const navigate = useNavigate();
 
-  if (user) {
-    console.log("user app", user);
-    console.log("userCards app", user.userCards);
-  }
+  const loadUser = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:3000/api/user/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+      console.log("data", data);
+      setUser(data);
+      setLoading(false); // set loading to false when data is loaded
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
-    const user = JSON.parse(sessionStorage.getItem("user"));
-    console.log("session user", user);
-    if (user) {
-      setUser(user);
-      console.log("session user", user);
-    }
-  }, []);
-
-  /*   useEffect(() => {
-    async function fetchUser() {
-      try {
-        const user = JSON.parse(sessionStorage.getItem("user"));
-        console.log("session user", user);
-        const response = await fetch(
-          `http://localhost:3000/api/user/${user._id}/cards`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        const data = await response.json();
-        console.log("data", data);
-        if (data.success) {
-
-          setUser(data.user);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    fetchUser();
-  }, []); */
-
-  /* useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const user = JSON.parse(sessionStorage.getItem("user"));
-        console.log("session user", user);
-        const response = await fetch(
-          `http://localhost:3000/api/user/${user._id}/cards`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        const data = await response.json();
-        console.log("data", data);
-        if (data.success) {
-          setUser(data.user);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchUser();
-  }, []); */
+    console.log("useeffect", user);
+    loadUser(sessionUser);
+  }, [setUser]);
 
   const userLogout = async () => {
     try {
@@ -96,6 +54,8 @@ function App() {
       console.error(error);
     }
   };
+
+  if (loading) return <div>Loading...</div>; // conditionally render loading state
 
   if (!user)
     return (

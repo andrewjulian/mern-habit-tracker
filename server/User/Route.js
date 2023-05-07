@@ -32,5 +32,5 @@ module.exports = router;
 router.route("/:id/cards").get(getCards);
 module.exports = router;
 
-router.route("/user/:id").get(getUser);
+router.route("/:id").get(getUser);
 module.exports = router;
