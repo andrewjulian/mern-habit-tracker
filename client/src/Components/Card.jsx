@@ -1,33 +1,16 @@
 import React, { useState } from "react";
-import DatePicker from "react-datepicker";
 import CardTasks from "./CardTasks";
-
-const sampleTasks = [
-  {
-    status: 0,
-    text: "Task 1",
-  },
-  {
-    status: 1,
-    text: "Task 2",
-  },
-  {
-    status: 2,
-    text: "Task 3",
-  },
-];
 
 const Card = ({ card }) => {
   const [showModal, setShowModal] = useState(false);
   const [newTask, setNewTask] = useState("");
 
-  const displayTasks = sampleTasks.map((task, index) => {
+  const displayTasks = card.cardTasks.map((task, index) => {
     return <CardTasks key={index} task={task} />;
   });
 
   const addNewTask = () => {
-    console.log("add task");
-    setShowModal(false);
+    console.log("newTask");
   };
 
   return (

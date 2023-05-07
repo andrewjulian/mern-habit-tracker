@@ -19,10 +19,39 @@ function App() {
 
   useEffect(() => {
     const user = JSON.parse(sessionStorage.getItem("user"));
+    console.log("session user", user);
     if (user) {
       setUser(user);
+      console.log("session user", user);
     }
   }, []);
+
+  /*   useEffect(() => {
+    async function fetchUser() {
+      try {
+        const user = JSON.parse(sessionStorage.getItem("user"));
+        console.log("session user", user);
+        const response = await fetch(
+          `http://localhost:3000/api/user/${user._id}/cards`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        const data = await response.json();
+        console.log("data", data);
+        if (data.success) {
+
+          setUser(data.user);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchUser();
+  }, []); */
 
   /* useEffect(() => {
     const fetchUser = async () => {

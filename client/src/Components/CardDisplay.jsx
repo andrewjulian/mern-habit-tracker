@@ -2,9 +2,18 @@ import React, { useState, useEffect } from "react";
 import Card from "./Card";
 
 const CardDisplay = ({ user }) => {
-  const [cards, setCards] = useState([]);
-
   console.log("user", user);
+  console.log("userCards", user.userCards);
+
+  let displayCards = null;
+
+  if (user.userCards.length > 0) {
+    displayCards = user.userCards.map((card, index) => {
+      return <Card key={index} card={card} />;
+    });
+  } else {
+    displayCards = <p>No cards yet!</p>;
+  }
 
   /*   useEffect(() => {
     const fetchCards = async () => {
@@ -29,6 +38,7 @@ const CardDisplay = ({ user }) => {
 
   return (
     <div className="text-center align-middle mt-10">
+      {displayCards}
       <button className="bg-[#7e6e45] rounded-xl text-white my-7 px-3 py-1">
         <p>Add Card</p>
       </button>
