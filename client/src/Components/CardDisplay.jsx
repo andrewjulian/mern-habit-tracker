@@ -2,10 +2,8 @@ import React, { useState, useEffect } from "react";
 import Card from "./Card";
 
 const CardDisplay = ({ user }) => {
-  console.log("user", user);
-  console.log("userCards", user.userCards);
-
   let displayCards = null;
+  if (!user) return null;
 
   if (user.userCards.length != null && user.userCards.length > 0) {
     displayCards = user.userCards.map((card, index) => {

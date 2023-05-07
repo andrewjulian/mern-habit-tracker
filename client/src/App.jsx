@@ -11,7 +11,7 @@ import { UserContext } from "./Context/userContext";
 const sessionUser = sessionStorage.getItem("user");
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useContext(UserContext);
   const [loading, setLoading] = useState(true); // add loading state
   const navigate = useNavigate();
 
@@ -24,7 +24,6 @@ function App() {
         },
       });
       const data = await response.json();
-      console.log("data", data);
       setUser(data);
       setLoading(false); // set loading to false when data is loaded
     } catch (error) {
@@ -33,9 +32,13 @@ function App() {
   };
 
   useEffect(() => {
-    console.log("useeffect", user);
-    loadUser(sessionUser);
-  }, [setUser]);
+    if (sessionUser) {
+      loadUser(sessionUser);
+    } else {
+      setLoading(false);
+      setUser(null);
+    }
+  }, []);
 
   const userLogout = async () => {
     try {
