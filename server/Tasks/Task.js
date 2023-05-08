@@ -48,7 +48,21 @@ const getTasks = async (req, res) => {
   res.json(tasks);
 };
 
+const deleteTask = async (req, res) => {
+  try {
+    const task = await Task.findById(req.params.id);
+    const card = await Card.findById(task.card);
+    card.cardTasks.pull(task);
+    await card.save();
+    res.json({ success: true });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 module.exports = {
   createTask,
+  deleteTask,
   getTasks,
 };
