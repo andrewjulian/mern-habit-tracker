@@ -39,6 +39,8 @@ const addCard = async (req, res) => {
       { new: true }
     );
 
+    user = await User.findById(req.body.user).populate("userCards");
+
     // Return the updated user object
     res.json({ success: true, user });
   } catch (error) {

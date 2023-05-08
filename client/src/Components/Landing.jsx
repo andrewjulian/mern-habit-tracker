@@ -1,7 +1,7 @@
 import React from "react";
 import CardDisplay from "./CardDisplay";
 
-const Landing = ({ user }) => {
+const Landing = ({ user, setUser }) => {
   return (
     <div className="m-[15px]">
       <h1 className="text-center font-mono text-3xl font-bold  text-gray-900">
@@ -10,7 +10,7 @@ const Landing = ({ user }) => {
       <h1 className="text-center font-mono my-[4px] text-xl font-bold tracking-tight text-gray-900">
         Your Thoughtful Planning Tool
       </h1>
-      <CardDisplay user={user} />
+      <CardDisplay user={user} setUser={setUser} />
     </div>
   );
 };

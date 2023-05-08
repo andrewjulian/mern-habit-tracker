@@ -33,8 +33,10 @@ const createTask = async (req, res) => {
       { new: true }
     );
 
+    card = Card.findById(req.body.card._id).populate("cardTasks");
+
     // Return the updated user object
-    res.json({ success: true, card });
+    res.json({ success: true, task });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });

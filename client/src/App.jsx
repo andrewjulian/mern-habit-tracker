@@ -1,19 +1,17 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./App.css";
-//import { UserContext } from "./Context/userContext";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./Components/Login";
 import Signup from "./Components/SignUp";
 import Navbar from "./Components/Navbar";
 import Landing from "./Components/Landing";
-import { UserContext } from "./Context/userContext";
 const sessionUser = sessionStorage.getItem("user");
 
 function App() {
-  const [user, setUser] = useContext(UserContext);
-  const [loading, setLoading] = useState(true); // add loading state
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const [user, setUser] = useState(null);
 
   const loadUser = async (id) => {
     try {
@@ -76,7 +74,10 @@ function App() {
     <div>
       <Navbar user={user} userLogout={userLogout} />
       <Routes>
-        <Route path="/landing" element={<Landing user={user} />} />
+        <Route
+          path="/landing"
+          element={<Landing user={user} setUser={setUser} />}
+        />
         <Route path="*" element={<Navigate to="/landing" />} />
       </Routes>
     </div>

@@ -1,38 +1,17 @@
 import React, { useState, useEffect } from "react";
 import Card from "./Card";
 
-const CardDisplay = ({ user }) => {
+const CardDisplay = ({ user, setUser }) => {
   let displayCards = null;
   if (!user) return null;
 
   if (user.userCards.length != null && user.userCards.length > 0) {
     displayCards = user.userCards.map((card, index) => {
-      return <Card key={index} card={card} />;
+      return <Card key={index} card={card} user={user} setUser={setUser} />;
     });
   } else {
     displayCards = <p>No cards yet!</p>;
   }
-
-  /*   useEffect(() => {
-    const fetchCards = async () => {
-      try {
-        const response = await fetch(
-          "http://localhost:3000/api/user/:id/cards",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        const data = await response.json();
-        console.log("data", data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchCards();
-  }, []); */
 
   return (
     <div className="text-center align-middle mt-10">

@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import CardTasks from "./CardTasks";
 
-const Card = ({ card }) => {
+const Card = ({ card, user, setUser }) => {
   const [showModal, setShowModal] = useState(false);
   const [newTask, setNewTask] = useState("");
 
-  const displayTasks = card.cardTasks.map((task, index) => {
-    return <CardTasks key={index} task={task} />;
-  });
+  const displayTasks =
+    card.cardTasks &&
+    card.cardTasks.map((task, index) => {
+      return <CardTasks key={index} task={task} />;
+    });
 
   const addNewTask = (e) => {
     e.preventDefault();
@@ -26,7 +28,7 @@ const Card = ({ card }) => {
           }
         );
         const data = await response.json();
-        console.log(data);
+        setUser({ ...user, userCards: [...user.userCards, data] });
         setShowModal(false);
       } catch (err) {
         console.error(err.message);

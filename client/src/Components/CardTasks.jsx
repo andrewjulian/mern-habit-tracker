@@ -13,6 +13,8 @@ const CardTasks = ({ task }) => {
   const [status, setStatus] = useState(0);
   const [edit, setEdit] = useState(false);
 
+  console.log("task", task);
+
   const handleStatus = () => {
     if (status === statusButton.length - 1) {
       setStatus(0);
@@ -80,7 +82,7 @@ const CardTasks = ({ task }) => {
       <div className="flex align-middle justify-between my-1 py-3 border-b border-[#7e6e45]">
         <div className="flex items-center">
           {displayStatus}
-          <h1>The Highlight will go here</h1>
+          {task.text}
         </div>
         <BiEdit onClick={toggleEdit} color={"#7e6e45"} size={25} />
       </div>
