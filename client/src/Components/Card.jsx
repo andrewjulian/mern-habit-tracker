@@ -28,8 +28,15 @@ const Card = ({ card, user, setUser }) => {
           }
         );
         const data = await response.json();
-        setUser({ ...user, userCards: [...user.userCards, data] });
+        const cardIndex = user.userCards.findIndex(
+          (userCard) => userCard._id === card._id
+        );
+        const updatedUserCards = [...user.userCards];
+        updatedUserCards[cardIndex].cardTasks.push(data);
+        const updatedUser = { ...user, userCards: updatedUserCards };
+        setUser(updatedUser);
         setShowModal(false);
+        setNewTask("");
       } catch (err) {
         console.error(err.message);
       }

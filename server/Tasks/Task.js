@@ -27,13 +27,11 @@ const createTask = async (req, res) => {
     });
 
     // Add the task to the cards's list of tasks and save the user
-    const card = await Card.findByIdAndUpdate(
+    let card = await Card.findByIdAndUpdate(
       req.body.card._id,
       { $push: { cardTasks: task } },
       { new: true }
     );
-
-    card = Card.findById(req.body.card._id).populate("cardTasks");
 
     // Return the updated user object
     res.json({ success: true, task });
