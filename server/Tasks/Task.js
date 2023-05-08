@@ -2,36 +2,43 @@ const Task = require("../model/TaskModel");
 const User = require("../model/UserModel");
 const Card = require("../model/CardModel");
 
-const createTask = async (req, res) => {
-  const user = await User.findById(req.params.id);
-  const card = await Card.findById(req.body.cardId);
+/* const createTask = async (req, res) => {
+  const user = await User.findById(req.body.user);
+  const card = await Card.findById(req.body.card);
   const newTask = new Task({
     user: user,
     card: card,
-    status: 0,
+    status: req.body.status,
     text: req.body.text,
   });
   await newTask.save();
   user.card.cardTasks.push(newTask);
   await user.save();
   res.json(newTask);
-};
+}; */
 
-const deleteTask = async (req, res) => {
-  const task = await Task.findById(req.params.id);
-  const user = await User.findById(task.user);
-  const card = await Card.findById(task.card);
-  user.card.cardTasks.pull(task);
-  await user.save();
-  await task.remove();
-  res.json("Task Deleted");
-};
+const createTask = async (req, res) => {
+  try {
+    // Create the task
+    const task = await Task.create({
+      card: req.body.card,
+      status: req.body.status,
+      text: req.body.text,
+    });
 
-const updateTask = async (req, res) => {
-  const task = await Task.findById(req.params.id);
-  task.status = req.body.status;
-  await task.save();
-  res.json(task);
+    // Add the task to the cards's list of tasks and save the user
+    const card = await Card.findByIdAndUpdate(
+      req.body.card._id,
+      { $push: { cardTasks: task } },
+      { new: true }
+    );
+
+    // Return the updated user object
+    res.json({ success: true, card });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
 };
 
 const getTasks = async (req, res) => {
@@ -41,7 +48,5 @@ const getTasks = async (req, res) => {
 
 module.exports = {
   createTask,
-  deleteTask,
-  updateTask,
   getTasks,
 };

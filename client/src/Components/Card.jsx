@@ -9,8 +9,30 @@ const Card = ({ card }) => {
     return <CardTasks key={index} task={task} />;
   });
 
-  const addNewTask = () => {
-    console.log("newTask");
+  const addNewTask = (e) => {
+    e.preventDefault();
+    const addNewTask = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:3000/api/task/addTask/`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              card: card,
+              status: 0,
+              text: newTask,
+            }),
+          }
+        );
+        const data = await response.json();
+        console.log(data);
+        setShowModal(false);
+      } catch (err) {
+        console.error(err.message);
+      }
+    };
+    addNewTask();
   };
 
   return (
@@ -74,7 +96,7 @@ const Card = ({ card }) => {
                               type="submit"
                               className="bg-[#7e6e45] rounded-xl text-white px-3 py-1  active:bg-[#7e6e45] font-bold uppercase text-sm  shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                             >
-                              Save Changes
+                              Add Task
                             </button>
                           </div>
                         </form>
