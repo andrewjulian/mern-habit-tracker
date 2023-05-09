@@ -65,7 +65,7 @@ const CardTasks = ({ task }) => {
             <input
               className="w-56 h-6 rounded-md border-[#7e6e45] border-2"
               type="text"
-              value={task.task}
+              value={task.text}
               onChange={(e) => task.task(e.target.value)}
             />
           </div>
