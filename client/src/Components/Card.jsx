@@ -28,8 +28,19 @@ const Card = ({ card, user, setUser }) => {
             }),
           }
         );
-        const updatedUser = await response.json();
-        setUser(updatedUser);
+
+        const data = await response.json();
+        console.log(data);
+
+        const updatedUser = await fetch(
+          `http://localhost:3000/api/user/${user._id}`,
+          {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+        const updatedUserData = await updatedUser.json();
+        setUser(updatedUserData);
         setShowModal(false);
         setNewTask("");
       } catch (err) {

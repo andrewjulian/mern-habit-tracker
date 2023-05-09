@@ -21,47 +21,21 @@ const createTask = async (req, res) => {
   try {
     // Create the task
     const task = await Task.create({
-      user: req.body.user,
       card: req.body.card,
       status: req.body.status,
       text: req.body.text,
     });
 
     // Add the task to the cards's list of tasks and save the user
-    const card = await Card.findByIdAndUpdate(
-      req.body.card,
+    let card = await Card.findByIdAndUpdate(
+      req.body.card._id,
       { $push: { cardTasks: task } },
       { new: true }
     );
-
-    const tasks = await Task.find({ card: card._id }).populate("card");
-
-    const user = await User.findById(req.body.user).populate("cardTasks");
-
-    const filter = { _id: user._id, card: card._id };
-    const update = { $set: { cardTasks: tasks } };
-    const options = { new: true };
-
-    //const updatedUser = await User.findOneAndUpdate(filter, update, options);
-    const updatedUser = User.findById(user._id)
-      .populate({
-        path: "userCards",
-        populate: {
-          path: "cardTasks",
-          model: Task,
-        },
-      })
-      .exec((err, user) => {
-        if (err) {
-          // Handle error
-        } else {
-          // The `user` object now has an array of cards, each with their `cardTasks` populated
-          console.log(user.userCards[0].cardTasks);
-        }
-      });
+    card.save();
 
     // Return the updated user object
-    res.json({ success: true, updatedUser });
+    res.json({ success: true, card });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });
