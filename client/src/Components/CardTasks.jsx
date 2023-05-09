@@ -13,8 +13,6 @@ const CardTasks = ({ task }) => {
   const [status, setStatus] = useState(0);
   const [edit, setEdit] = useState(false);
 
-  console.log("task", task);
-
   const handleStatus = () => {
     if (status === statusButton.length - 1) {
       setStatus(0);

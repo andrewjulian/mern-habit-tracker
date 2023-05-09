@@ -21,19 +21,14 @@ const Card = ({ card, user, setUser }) => {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
+              user: user,
               card: card,
               status: 0,
               text: newTask,
             }),
           }
         );
-        const data = await response.json();
-        const cardIndex = user.userCards.findIndex(
-          (userCard) => userCard._id === card._id
-        );
-        const updatedUserCards = [...user.userCards];
-        updatedUserCards[cardIndex].cardTasks.push(data);
-        const updatedUser = { ...user, userCards: updatedUserCards };
+        const updatedUser = await response.json();
         setUser(updatedUser);
         setShowModal(false);
         setNewTask("");
