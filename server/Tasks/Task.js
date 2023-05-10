@@ -2,21 +2,6 @@ const Task = require("../model/TaskModel");
 const User = require("../model/UserModel");
 const Card = require("../model/CardModel");
 
-/* const createTask = async (req, res) => {
-  const user = await User.findById(req.body.user);
-  const card = await Card.findById(req.body.card);
-  const newTask = new Task({
-    user: user,
-    card: card,
-    status: req.body.status,
-    text: req.body.text,
-  });
-  await newTask.save();
-  user.card.cardTasks.push(newTask);
-  await user.save();
-  res.json(newTask);
-}; */
-
 const createTask = async (req, res) => {
   try {
     // Create the task
@@ -33,6 +18,8 @@ const createTask = async (req, res) => {
       { new: true }
     );
     card.save();
+
+    card = card.populate("cardTasks");
 
     // Return the updated user object
     res.json({ success: true, card });

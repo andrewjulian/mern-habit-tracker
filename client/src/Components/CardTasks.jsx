@@ -10,6 +10,7 @@ import { AiFillCloseCircle } from "react-icons/ai";
 import { BiSave } from "react-icons/bi";
 
 const CardTasks = ({ task }) => {
+  console.log(task);
   const [status, setStatus] = useState(0);
   const [edit, setEdit] = useState(false);
 
@@ -65,7 +66,7 @@ const CardTasks = ({ task }) => {
             <input
               className="w-56 h-6 rounded-md border-[#7e6e45] border-2"
               type="text"
-              value={task.text}
+              value={task}
               onChange={(e) => task.task(e.target.value)}
             />
           </div>
@@ -80,7 +81,7 @@ const CardTasks = ({ task }) => {
       <div className="flex align-middle justify-between my-1 py-3 border-b border-[#7e6e45]">
         <div className="flex items-center">
           {displayStatus}
-          {task.text}
+          {task}
         </div>
         <BiEdit onClick={toggleEdit} color={"#7e6e45"} size={25} />
       </div>
