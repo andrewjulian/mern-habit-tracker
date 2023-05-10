@@ -11,8 +11,10 @@ import { BiSave } from "react-icons/bi";
 
 const CardTasks = ({ task }) => {
   console.log(task);
-  const [status, setStatus] = useState(0);
+  const [status, setStatus] = useState(task.status);
   const [edit, setEdit] = useState(false);
+
+  //need to add update when status is changed
 
   const handleStatus = () => {
     if (status === statusButton.length - 1) {
