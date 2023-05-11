@@ -68,8 +68,8 @@ const CardTasks = ({ task }) => {
             <input
               className="w-56 h-6 rounded-md border-[#7e6e45] border-2"
               type="text"
-              value={task}
-              onChange={(e) => task.task(e.target.value)}
+              value={task.text}
+              onChange={(e) => setTask(e.target.value)}
             />
           </div>
           <BiSave onClick={toggleEdit} color={"#7e6e45"} size={25} />
@@ -83,7 +83,7 @@ const CardTasks = ({ task }) => {
       <div className="flex align-middle justify-between my-1 py-3 border-b border-[#7e6e45]">
         <div className="flex items-center">
           {displayStatus}
-          {task}
+          {task.text}
         </div>
         <BiEdit onClick={toggleEdit} color={"#7e6e45"} size={25} />
       </div>

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Card from "./Card";
 
-const CardDisplay = ({ user, setUser }) => {
+const CardDisplay = ({ user, cards, setUser }) => {
   let displayCards = null;
   if (!user) return null;
 
-  if (user.userCards != null && user.userCards.length > 0) {
-    displayCards = user.userCards.map((card, index) => {
+  if (cards != null && cards.length > 0) {
+    displayCards = cards.map((card, index) => {
       return <Card key={index} card={card} user={user} setUser={setUser} />;
     });
   } else {

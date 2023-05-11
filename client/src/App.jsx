@@ -12,8 +12,10 @@ function App() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
+  const [cards, setCards] = useState(null);
 
   console.log(user);
+  console.log(cards);
 
   const loadUser = async (id) => {
     try {
@@ -24,7 +26,8 @@ function App() {
         },
       });
       const data = await response.json();
-      setUser(data);
+      setUser(data.user);
+      setCards(data.cards);
       setLoading(false); // set loading to false when data is loaded
     } catch (error) {
       console.error(error);
@@ -78,7 +81,7 @@ function App() {
       <Routes>
         <Route
           path="/landing"
-          element={<Landing user={user} setUser={setUser} />}
+          element={<Landing user={user} cards={cards} setUser={setUser} />}
         />
         <Route path="*" element={<Navigate to="/landing" />} />
       </Routes>
