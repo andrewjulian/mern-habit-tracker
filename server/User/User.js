@@ -97,7 +97,7 @@ const getUser = async (req, res) => {
       "userCards"
     );
 
-    const cards = await user.userCards.find().populate("cardTasks");
+    const cards = await Card.find({ _id: user._id }).populate("cardTasks");
 
     user.userCards = cards;
 
