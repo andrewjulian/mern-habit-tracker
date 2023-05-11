@@ -33,7 +33,7 @@ const addCard = async (req, res) => {
     const card = await Card.create(req.body);
 
     // Add the card to the user's list of cards and save the user
-    const user = await User.findByIdAndUpdate(
+    let user = await User.findByIdAndUpdate(
       req.body.user,
       { $push: { userCards: card } },
       { new: true }

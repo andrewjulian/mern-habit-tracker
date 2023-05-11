@@ -37,6 +37,11 @@ const login = async (req, res, next) => {
       const userWithCards = await User.findById({ _id: user._id }).populate(
         "userCards"
       );
+
+      const cards = await Card.find({ user: user._id }).populate("cardTasks");
+
+      userWithCards.userCards = cards;
+
       req.session.user = userWithCards;
       res.json({
         success: true,
@@ -58,7 +63,9 @@ const verify = (req, res) => {
 const allusers = async (req, res) => {
   try {
     const users = await User.find().populate("userCards");
-    res.json(users);
+    const userCards = await Card.find().populate("cardTasks");
+
+    res.json({ user: users, cards: userCards });
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: "Failed to fetch users" });
@@ -86,7 +93,14 @@ const deleteUser = async (req, res) => {
 
 const getUser = async (req, res) => {
   try {
-    const user = await User.findById(req.params.id).populate("userCards");
+    const user = await User.findOne({ _id: req.params.id }).populate(
+      "userCards"
+    );
+
+    const cards = await user.userCards.find().populate("cardTasks");
+
+    user.userCards = cards;
+
     res.json(user);
   } catch (err) {
     console.log(err);

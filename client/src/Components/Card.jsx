@@ -4,12 +4,16 @@ import CardTasks from "./CardTasks";
 const Card = ({ card, user, setUser }) => {
   const [showModal, setShowModal] = useState(false);
   const [newTask, setNewTask] = useState("");
+  const [cardTasks, setCardTasks] = useState(card.cardTasks);
 
   const displayTasks =
-    card.cardTasks &&
-    card.cardTasks.map((task, index) => {
-      return <CardTasks key={index} task={task} />;
-    });
+    cardTasks != null ? (
+      cardTasks.map((task, index) => {
+        return <CardTasks key={index} task={task} />;
+      })
+    ) : (
+      <p>No tasks</p>
+    );
 
   const addNewTask = (e) => {
     e.preventDefault();
@@ -21,7 +25,6 @@ const Card = ({ card, user, setUser }) => {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-              user: user,
               card: card,
               status: 0,
               text: newTask,
@@ -32,19 +35,13 @@ const Card = ({ card, user, setUser }) => {
         const data = await response.json();
         console.log(data);
 
-        const updatedUser = await fetch(
-          `http://localhost:3000/api/user/${user._id}`,
-          {
-            method: "GET",
-            headers: { "Content-Type": "application/json" },
-          }
-        );
-        const updatedUserData = await updatedUser.json();
-        setUser(updatedUserData);
-        setShowModal(false);
-        setNewTask("");
-      } catch (err) {
-        console.error(err.message);
+        if (data) {
+          setCardTasks(data.cardTasks);
+          setNewTask("");
+          setShowModal(false);
+        }
+      } catch (error) {
+        console.log(error);
       }
     };
     addNewTask();

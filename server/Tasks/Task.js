@@ -4,24 +4,16 @@ const Card = require("../model/CardModel");
 
 const createTask = async (req, res) => {
   try {
-    // Create the task
-    const task = await Task.create({
-      card: req.body.card,
-      status: req.body.status,
-      text: req.body.text,
-    });
+    const task = await Task.create(req.body);
 
-    // Add the task to the cards's list of tasks and save the user
     let card = await Card.findByIdAndUpdate(
-      req.body.card._id,
+      req.body.card,
       { $push: { cardTasks: task } },
       { new: true }
     );
-    card.save();
 
-    card = card.populate("cardTasks");
+    card = await Card.findById(req.body.card).populate("cardTasks");
 
-    // Return the updated user object
     res.json({ success: true, card });
   } catch (error) {
     console.error(error);

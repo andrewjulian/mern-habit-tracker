@@ -13,6 +13,8 @@ function App() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
 
+  console.log(user);
+
   const loadUser = async (id) => {
     try {
       const response = await fetch(`http://localhost:3000/api/user/${id}`, {
