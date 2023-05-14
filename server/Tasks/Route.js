@@ -9,7 +9,7 @@ module.exports = router;
 router.route("/:id").get(getTask);
 module.exports = router;
 
-router.route("/id").patch(updateTask);
+router.route("/:id").patch(updateTask);
 module.exports = router;
 
 router.route("/delete/:id").delete(deleteTask);

@@ -9,7 +9,9 @@ const Card = ({ card, user, setUser }) => {
   const displayTasks =
     cardTasks != null ? (
       cardTasks.map((task, index) => {
-        return <CardTasks key={index} task={task} />;
+        return (
+          <CardTasks key={index} user={user} setUser={setUser} task={task} />
+        );
       })
     ) : (
       <p>No tasks</p>

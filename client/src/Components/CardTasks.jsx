@@ -9,11 +9,11 @@ import { BsCircleHalf } from "react-icons/bs";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { BiSave } from "react-icons/bi";
 
-const CardTasks = ({ task }) => {
+const CardTasks = ({ task, user, setUser }) => {
   const [status, setStatus] = useState(task.status);
   const [edit, setEdit] = useState(false);
   const [taskText, setTask] = useState(task.text);
-  const [card, setCard] = useState(task._id);
+  const [cardId, setCardId] = useState(task.card._id);
 
   //need to add update when status is changed
 
@@ -38,14 +38,14 @@ const CardTasks = ({ task }) => {
                 "Content-Type": "application/json",
               },
               body: JSON.stringify({
-                card: card,
+                card: cardId,
                 text: taskText,
                 status: status,
               }),
             }
           );
           const data = await response.json();
-          console.log(data.message);
+          console.log(data.task);
         } catch (error) {
           console.error(error);
         }
@@ -96,7 +96,7 @@ const CardTasks = ({ task }) => {
             <input
               className="w-56 h-6 rounded-md border-[#7e6e45] border-2"
               type="text"
-              value={task.text}
+              value={taskText}
               onChange={(e) => setTask(e.target.value)}
             />
           </div>

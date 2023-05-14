@@ -41,11 +41,23 @@ const deleteTask = async (req, res) => {
 
 const updateTask = async (req, res) => {
   try {
-    const task = Task.findById(req.params.id);
-    task.status = req.body.status;
+    const task = await Task.findById(req.params.id);
+    const card = await Card.findById(req.body.card);
+
     task.text = req.body.text;
-    await task.save();
-    res.json({ success: true, task: task });
+    task.status = req.body.status;
+    task.card = card;
+
+    const updatedTask = await Task.findByIdAndUpdate(
+      req.params.id,
+      {
+        text: req.body.text,
+        status: req.body.status,
+      },
+      { new: true }
+    );
+
+    res.json({ success: true, task: updatedTask });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });
