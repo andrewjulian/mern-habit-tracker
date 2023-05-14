@@ -13,6 +13,7 @@ const CardTasks = ({ task }) => {
   const [status, setStatus] = useState(task.status);
   const [edit, setEdit] = useState(false);
   const [taskText, setTask] = useState(task.text);
+  const [card, setCard] = useState(task._id);
 
   //need to add update when status is changed
 
@@ -25,8 +26,34 @@ const CardTasks = ({ task }) => {
   };
 
   const toggleEdit = () => {
+    if (edit) {
+      //update task
+      const updateTask = async () => {
+        try {
+          const response = await fetch(
+            `http://localhost:3000/api/task/${task._id}`,
+            {
+              method: "PATCH",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                card: card,
+                text: taskText,
+                status: status,
+              }),
+            }
+          );
+          const data = await response.json();
+          console.log(data.message);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+      updateTask();
+      setEdit(!edit);
+    }
     setEdit(!edit);
-    console.log(edit);
   };
 
   const statusButton = [

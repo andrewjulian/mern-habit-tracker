@@ -1,12 +1,15 @@
 const express = require("express");
 const router = express.Router();
 
-const { createTask, getTasks, deleteTask } = require("./Task");
+const { createTask, getTask, deleteTask, updateTask } = require("./Task");
 
 router.route("/addTask").post(createTask);
 module.exports = router;
 
-router.route("/:id").get(getTasks);
+router.route("/:id").get(getTask);
+module.exports = router;
+
+router.route("/id").patch(updateTask);
 module.exports = router;
 
 router.route("/delete/:id").delete(deleteTask);
