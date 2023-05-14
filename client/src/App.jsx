@@ -14,9 +14,6 @@ function App() {
   const [user, setUser] = useState(null);
   const [cards, setCards] = useState(null);
 
-  console.log(user);
-  console.log(cards);
-
   const loadUser = async (id) => {
     try {
       const response = await fetch(`http://localhost:3000/api/user/${id}`, {
@@ -40,6 +37,7 @@ function App() {
     } else {
       setLoading(false);
       setUser(null);
+      setCards(null);
     }
   }, []);
 

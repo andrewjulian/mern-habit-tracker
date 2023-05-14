@@ -10,9 +10,9 @@ import { AiFillCloseCircle } from "react-icons/ai";
 import { BiSave } from "react-icons/bi";
 
 const CardTasks = ({ task }) => {
-  console.log(task);
   const [status, setStatus] = useState(task.status);
   const [edit, setEdit] = useState(false);
+  const [taskText, setTask] = useState(task.text);
 
   //need to add update when status is changed
 
@@ -26,6 +26,7 @@ const CardTasks = ({ task }) => {
 
   const toggleEdit = () => {
     setEdit(!edit);
+    console.log(edit);
   };
 
   const statusButton = [
