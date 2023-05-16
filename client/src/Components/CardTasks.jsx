@@ -35,31 +35,33 @@ const CardTasks = ({ task, setCardTasks }) => {
     });
   };
 
+  const updateTask = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/task/${task._id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            card: cardId,
+            text: taskText,
+            status: status,
+          }),
+        }
+      );
+      const data = await response.json();
+      updateTasks(data.task);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const toggleEdit = () => {
     if (edit) {
       //update task
-      const updateTask = async () => {
-        try {
-          const response = await fetch(
-            `http://localhost:3000/api/task/${task._id}`,
-            {
-              method: "PATCH",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                card: cardId,
-                text: taskText,
-                status: status,
-              }),
-            }
-          );
-          const data = await response.json();
-          updateTasks(data.task);
-        } catch (error) {
-          console.error(error);
-        }
-      };
+
       updateTask();
       setEdit(!edit);
     }
