@@ -9,13 +9,11 @@ import { BsCircleHalf } from "react-icons/bs";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { BiSave } from "react-icons/bi";
 
-const CardTasks = ({ task, user, setUser }) => {
+const CardTasks = ({ task, setCardTasks }) => {
   const [status, setStatus] = useState(task.status);
   const [edit, setEdit] = useState(false);
   const [taskText, setTask] = useState(task.text);
   const [cardId, setCardId] = useState(task.card._id);
-
-  //need to add update when status is changed
 
   const handleStatus = () => {
     if (status === statusButton.length - 1) {
@@ -23,6 +21,18 @@ const CardTasks = ({ task, user, setUser }) => {
     } else {
       setStatus(status + 1);
     }
+  };
+
+  const updateTasks = (newTask) => {
+    setCardTasks((prev) => {
+      return prev.map((task) => {
+        if (task._id === newTask._id) {
+          return newTask;
+        } else {
+          return task;
+        }
+      });
+    });
   };
 
   const toggleEdit = () => {
@@ -45,7 +55,7 @@ const CardTasks = ({ task, user, setUser }) => {
             }
           );
           const data = await response.json();
-          console.log(data.task);
+          updateTasks(data.task);
         } catch (error) {
           console.error(error);
         }

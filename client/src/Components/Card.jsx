@@ -10,7 +10,7 @@ const Card = ({ card, user, setUser }) => {
     cardTasks != null ? (
       cardTasks.map((task, index) => {
         return (
-          <CardTasks key={index} user={user} setUser={setUser} task={task} />
+          <CardTasks key={index} setCardTasks={setCardTasks} task={task} />
         );
       })
     ) : (
