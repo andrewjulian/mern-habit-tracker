@@ -23,6 +23,8 @@ const CardTasks = ({ task, setCardTasks }) => {
     }
   };
 
+  //state is always one thing behind
+
   const updateTasks = (newTask) => {
     setCardTasks((prev) => {
       return prev.map((task) => {
