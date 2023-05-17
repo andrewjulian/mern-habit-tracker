@@ -55,7 +55,6 @@ const CardTasks = ({ task, setCardTasks }) => {
   };
 
   const updateTasks = (newTask) => {
-    console.log(newTask);
     setCardTasks((prev) => {
       return prev.map((task) => {
         if (task._id === newTask._id) {
