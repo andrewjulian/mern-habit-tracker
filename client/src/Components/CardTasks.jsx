@@ -15,17 +15,47 @@ const CardTasks = ({ task, setCardTasks }) => {
   const [taskText, setTask] = useState(task.text);
   const [cardId, setCardId] = useState(task.card._id);
 
-  const handleStatus = () => {
+  /* const handleStatus = () => {
     if (status === statusButton.length - 1) {
       setStatus(0);
     } else {
       setStatus(status + 1);
     }
+  }; */
+
+  const handleStatus = async () => {
+    let current = status;
+    if (current === statusButton.length - 1) {
+      current = 0;
+    } else {
+      current = status + 1;
+    }
+
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/task/${task._id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            card: cardId,
+            text: taskText,
+            status: current,
+          }),
+        }
+      );
+      const data = await response.json();
+      setStatus(current);
+      updateTasks(data.task);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  //state is always one thing behind
-
   const updateTasks = (newTask) => {
+    console.log(newTask);
     setCardTasks((prev) => {
       return prev.map((task) => {
         if (task._id === newTask._id) {
