@@ -14,6 +14,9 @@ function App() {
   const [user, setUser] = useState(null);
   const [cards, setCards] = useState(null);
 
+  console.log("user out", user);
+  console.log("cards out", cards);
+
   const loadUser = async (id) => {
     try {
       const response = await fetch(`http://localhost:3000/api/user/${id}`, {
@@ -25,6 +28,9 @@ function App() {
       const data = await response.json();
       setUser(data.user);
       setCards(data.cards);
+      console.log("data", data);
+      console.log("user", data.user);
+      console.log("cards", data.cards);
       setLoading(false); // set loading to false when data is loaded
     } catch (error) {
       console.error(error);
@@ -66,7 +72,10 @@ function App() {
       <div>
         <Routes>
           <Route path="/landing" element={<Landing />} />
-          <Route path="/login" element={<Login setUser={setUser} />} />
+          <Route
+            path="/login"
+            element={<Login setUser={setUser} setCards={setCards} />}
+          />
           <Route path="/signup" element={<Signup setUser={setUser} />} />
           <Route path="*" element={<Navigate to="/login" />} />
         </Routes>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/refresco.png";
 
-const Login = ({ setUser }) => {
+const Login = ({ setUser, setCards }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -20,8 +20,9 @@ const Login = ({ setUser }) => {
       });
       const data = await response.json();
       if (data.success) {
-        sessionStorage.setItem("user", data.user._id);
+        sessionStorage.setItem("user", data.user);
         setUser(data.user);
+        setCards(data.cards);
         navigate("/landing");
       } else {
         console.log(data.message);

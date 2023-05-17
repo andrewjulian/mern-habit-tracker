@@ -34,13 +34,16 @@ const login = async (req, res, next) => {
     }
     await req.logIn(user, async (err) => {
       if (err) throw err;
-      const userWithCards = await User.findById({ _id: user._id }).populate(
+      const userWithCards = await User.findOne({ _id: user._id }).populate(
         "userCards"
       );
 
-      const cards = await Card.find({ user: user._id }).populate("cardTasks");
+      const cards = await Card.find({ user: userWithCards._id }).populate(
+        "cardTasks"
+      );
 
       req.session.user = userWithCards;
+      req.session.cards = cards;
       res.json({
         success: true,
         message: "Logged in successfully",
